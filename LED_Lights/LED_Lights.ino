@@ -47,7 +47,6 @@ void setup()
     ADCSRA |= (1 << ADSC); //start ADC measurements
     
     sei();//enable interrupts
-      
     
     
     ledStrip.setup();
@@ -114,7 +113,7 @@ ISR(ADC_vect)
     prevSlope = slope;
     prev = incomingAudio;
 
-    //ledColor = CHSV(0, 0, rounded);
+    //ledColor = CHSV(0, 0, 255);
     //ledStrip.show(ledColor);
 }
 

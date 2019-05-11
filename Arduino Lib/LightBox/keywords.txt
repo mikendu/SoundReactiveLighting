@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map For FastLED
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AnalogLED	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# FastLED methods
+# AnalogLED::addLeds	KEYWORD2
+
+# Colors
+show	KEYWORD2
+
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+# LED Pin Definitions
+PIN_R	LITERAL1
+PIN_G	LITERAL1
+PIN_B	LITERAL1

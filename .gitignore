@@ -1,3 +1,4 @@
 # Arduino build outputs
 *.hex
 *.elf
+.vscode/*
