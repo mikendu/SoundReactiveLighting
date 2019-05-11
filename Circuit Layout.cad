@@ -1,0 +1,583 @@
+<ElectronicDesign Guid="947e3618-116a-469e-a51f-197e206d61c5" Id="1">
+  <Prop Val="Circuit Layout" Nm="%%DESIGNNAME" />
+  <Prop Val="C:\Users\Michael\Documents\LED Reactive Lighting\Circuit Layout.cad" Nm="%%DESIGNFILENAME" />
+  <Prop Val="00:00:00" Nm="%%DESIGNTIME" />
+  <UsedPartTypes>
+    <PartType Id="7400" Name="TL082CP">
+      <Prop Val="https:https://download.siliconexpert.com/pdfs/2017/3/5/5/58/8/323/txn_/manual/p0008a.jpg" Nm="PRODUCT_PHOTOS" />
+      <Prop Val="https://download.siliconexpert.com/pdfs/2008/06/30/semi_ap/cs/nat/ds/nods.pdf" Nm="DATASHEETS" />
+      <Prop Val="Texas Instruments" Nm="%%SCHPARTMANUFACTURER" />
+      <Prop Val="TL082CP" Nm="%%SCHPARTNUM" />
+      <Prop Val="Op Amp Dual GP ±18V 8-Pin PDIP Tube" Nm="DESCRIPTION" />
+      <Prop Val="Texas Instruments" Nm="VENDOR" />
+      <Prop Val="General Purpose Amplifier" Nm="MANUFACTURER TYPE" />
+      <Prop Val="13@±15V" Nm="TYPICAL SLEW RATE - (V/US)" />
+      <Prop Val="No" Nm="MILITARY QUALIFIED" />
+      <Prop Val="BiFET" Nm="PROCESS TECHNOLOGY" />
+      <Prop Val="0.0002@±15V" Nm="MAXIMUM INPUT OFFSET CURRENT - (UA)" />
+      <Prop />
+      <Prop Val="PDIP" Nm="SUPPLIER PACKAGE" />
+      <Prop Val="2" Nm="NUMBER OF CHANNELS PER CHIP" />
+      <Prop />
+      <Prop />
+      <Prop />
+      <Prop Val="Tube" Nm="PACKAGING" />
+      <Prop Val="No" Nm="SHUT DOWN SUPPORT" />
+      <Prop Val="0~70" Nm="OPERATING TEMPERATURE - (°C)" />
+      <Prop Val="No" Nm="AUTOMOTIVE" />
+      <Prop Val="3" Nm="TYPICAL GAIN BANDWIDTH PRODUCT - (MHZ)" />
+      <Prop Val="15@±15V" Nm="MAXIMUM INPUT OFFSET VOLTAGE - (MV)" />
+      <Prop Val="DIP" Nm="STANDARD PACKAGE NAME" />
+      <Prop Val="General Purpose Amplifier" Nm="TYPE" />
+      <Prop Val="8" Nm="PIN COUNT" />
+      <Prop Val="0.0004@±15V" Nm="MAXIMUM INPUT BIAS CURRENT - (UA)" />
+      <Prop Val="U" Nm="%%SCHREFDESPREFIX" />
+      <Prop Val="Amplifiers and Comparators" Nm="%%SCHPARTCATEGORY" />
+      <Prop Val="Op Amps" Nm="%%SCHPARTFAMILY" />
+      <Footprint Name="P8" LibGuid="948f42e5-2323-4f68-851f-9e0368c44154">
+        <Metrics NamedPadCount="8" PadRows="4" PadCols="2" XPitch="1000000" YPitch="1000000" IsSmd="False" />
+        <BitBucket>
+          <Pad Id="7420" X="-3000000bu" Y="3000000bu" Name="1" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="False" Thermals="True" />
+          <Pad Id="7421" X="-3000000bu" Y="2000000bu" Name="2" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7422" X="-3000000bu" Y="1000000bu" Name="3" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7423" X="-3000000bu" Y="0bu" Name="4" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7424" X="0bu" Y="0bu" Name="5" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7425" X="0bu" Y="1000000bu" Name="6" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7426" X="0bu" Y="2000000bu" Name="7" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Pad Id="7427" X="0bu" Y="3000000bu" Name="8" Width="540000bu" Height="540000bu" Drill="340000bu" IsDrillOffset="False" Layer="AllLayers" Rot="0" IsRound="True" Thermals="True" />
+          <Text Id="7428" String="*" Rot="0" TextHeight="750000bu" LineWidth="75000bu" Mirrored="False" Layer="SsTop" X="-3225000bu" Y="3570000bu" />
+          <Poly Id="7429" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-2800000bu" Y="-500000bu" />
+            <Crn X="-200000bu" Y="-500000bu" />
+          </Poly>
+          <Poly Id="7430" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="-500000bu" />
+            <Crn X="-200000bu" Y="-347564bu" />
+          </Poly>
+          <Poly Id="7431" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="3500000bu" />
+            <Crn X="-2800000bu" Y="3500000bu" />
+          </Poly>
+          <Poly Id="7432" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-2800000bu" Y="2599000bu" />
+            <Crn X="-2800000bu" Y="2347564bu" />
+          </Poly>
+          <Poly Id="7433" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-1500000bu" Y="3500000bu" Flags="Arcctr" />
+            <Crn X="-1620000bu" Y="3500000bu" Flags="Arcbeg" />
+            <Crn X="-1380000bu" Y="3500000bu" Flags="Arcend" />
+          </Poly>
+          <Poly Id="7434" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-2800000bu" Y="1652436bu" />
+            <Crn X="-2800000bu" Y="1347564bu" />
+          </Poly>
+          <Poly Id="7435" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-2800000bu" Y="652436bu" />
+            <Crn X="-2800000bu" Y="347564bu" />
+          </Poly>
+          <Poly Id="7436" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-2800000bu" Y="-347564bu" />
+            <Crn X="-2800000bu" Y="-500000bu" />
+          </Poly>
+          <Poly Id="7437" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="347564bu" />
+            <Crn X="-200000bu" Y="652436bu" />
+          </Poly>
+          <Poly Id="7438" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="1347564bu" />
+            <Crn X="-200000bu" Y="1652436bu" />
+          </Poly>
+          <Poly Id="7439" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="2347564bu" />
+            <Crn X="-200000bu" Y="2652436bu" />
+          </Poly>
+          <Poly Id="7440" Name="" Type="Outline" Layer="SsTop" LineWidth="60000bu">
+            <Crn X="-200000bu" Y="3347564bu" />
+            <Crn X="-200000bu" Y="3500000bu" />
+          </Poly>
+        </BitBucket>
+      </Footprint>
+      <Symbol Id="7418" SetName="" LibGuid="f27475e1-3e6f-4283-854f-f208cb557f57">
+        <Section Id="7401" SymbolName="TL082_P_8" SectionName="" X="0bu" Y="0bu" Rot="0" Req="False" SwapId="0">
+          <BitBucket>
+            <Pin Id="7402" X="1000000bu" Y="0bu" Name="1OUT" Num="1" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7403" X="1000000bu" Y="-1000000bu" Name="1IN-" Num="2" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7404" X="1000000bu" Y="-2000000bu" Name="1IN+" Num="3" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7405" X="1000000bu" Y="-3000000bu" Name="VCC-" Num="4" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7406" X="23000000bu" Y="-3000000bu" Name="2IN+" Num="5" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7407" X="23000000bu" Y="-2000000bu" Name="2IN-" Num="6" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7408" X="23000000bu" Y="-1000000bu" Name="2OUT" Num="7" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <Pin Id="7409" X="23000000bu" Y="0bu" Name="VCC+" Num="8" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+            <SchText Id="7414" String="$%%SCHREFDES" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="4000000bu" />
+            <SchText Id="7415" String="$%%SCHPARTNUM" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="3000000bu" />
+            <SchText Id="7416" String="$%%SCHPARTVALUE" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="3000000bu" />
+            <Poly Id="7417">
+              <Crn X="3000000bu" Y="2000000bu" />
+              <Crn X="3000000bu" Y="-5000000bu" />
+              <Crn X="21000000bu" Y="-5000000bu" />
+              <Crn X="21000000bu" Y="2000000bu" />
+              <Crn X="3000000bu" Y="2000000bu" />
+            </Poly>
+          </BitBucket>
+        </Section>
+      </Symbol>
+      <PartType Name="TL082CP">
+        <Prop Val="https:https://download.siliconexpert.com/pdfs/2017/3/5/5/58/8/323/txn_/manual/p0008a.jpg" Nm="PRODUCT_PHOTOS" />
+        <Prop Val="https://download.siliconexpert.com/pdfs/2008/06/30/semi_ap/cs/nat/ds/nods.pdf" Nm="DATASHEETS" />
+        <Prop Val="Texas Instruments" Nm="%%SCHPARTMANUFACTURER" />
+        <Prop Val="TL082CP" Nm="%%SCHPARTNUM" />
+        <Prop Val="Op Amp Dual GP ±18V 8-Pin PDIP Tube" Nm="DESCRIPTION" />
+        <Prop Val="Texas Instruments" Nm="VENDOR" />
+        <Prop Val="General Purpose Amplifier" Nm="MANUFACTURER TYPE" />
+        <Prop Val="13@±15V" Nm="TYPICAL SLEW RATE - (V/US)" />
+        <Prop Val="No" Nm="MILITARY QUALIFIED" />
+        <Prop Val="BiFET" Nm="PROCESS TECHNOLOGY" />
+        <Prop Val="0.0002@±15V" Nm="MAXIMUM INPUT OFFSET CURRENT - (UA)" />
+        <Prop />
+        <Prop Val="PDIP" Nm="SUPPLIER PACKAGE" />
+        <Prop Val="2" Nm="NUMBER OF CHANNELS PER CHIP" />
+        <Prop />
+        <Prop />
+        <Prop />
+        <Prop Val="Tube" Nm="PACKAGING" />
+        <Prop Val="No" Nm="SHUT DOWN SUPPORT" />
+        <Prop Val="0~70" Nm="OPERATING TEMPERATURE - (°C)" />
+        <Prop Val="No" Nm="AUTOMOTIVE" />
+        <Prop Val="3" Nm="TYPICAL GAIN BANDWIDTH PRODUCT - (MHZ)" />
+        <Prop Val="15@±15V" Nm="MAXIMUM INPUT OFFSET VOLTAGE - (MV)" />
+        <Prop Val="DIP" Nm="STANDARD PACKAGE NAME" />
+        <Prop Val="General Purpose Amplifier" Nm="TYPE" />
+        <Prop Val="8" Nm="PIN COUNT" />
+        <Prop Val="0.0004@±15V" Nm="MAXIMUM INPUT BIAS CURRENT - (UA)" />
+        <Prop Val="U" Nm="%%SCHREFDESPREFIX" />
+        <Prop Val="Amplifiers and Comparators" Nm="%%SCHPARTCATEGORY" />
+        <Prop Val="Op Amps" Nm="%%SCHPARTFAMILY" />
+        <DefaultFootprint Name="P8" Guid="948f42e5-2323-4f68-851f-9e0368c44154" />
+        <DefaultSymbol Name="" Guid="f27475e1-3e6f-4283-854f-f208cb557f57" />
+      </PartType>
+      <DistributorParts />
+    </PartType>
+  </UsedPartTypes>
+  <Schematic Id="3" ActivePageRef="4">
+    <Prop Val="4278190335" Nm="%%SCHWIRECOLOR" />
+    <Prop Val="4278190335" Nm="%%SCHLINECOLOR" />
+    <Prop Val="100000bu" Nm="%%SCHLINEWIDTH" />
+    <Prop Val="6" Nm="%%SCHVOLTAGECOUNT" />
+    <Prop Val="+1.2V" Nm="%%SCHVOLTAGE" Idx="0" />
+    <Prop Val="+1.8V" Nm="%%SCHVOLTAGE" Idx="1" />
+    <Prop Val="+2.4V" Nm="%%SCHVOLTAGE" Idx="2" />
+    <Prop Val="+3.3V" Nm="%%SCHVOLTAGE" Idx="3" />
+    <Prop Val="+5V" Nm="%%SCHVOLTAGE" Idx="4" />
+    <Prop Val="+12V" Nm="%%SCHVOLTAGE" Idx="5" />
+    <Prop Val="Veserium" Nm="%%DESIGNCOMPANY" />
+    <Prop Val="A" Nm="%%DESIGNREVISION" />
+    <Prop Val="220000000bu,170000000bu" Nm="%%DESIGNDEFAULTPAGESIZE" />
+    <Prop Val="12" Nm="%%DESIGNDEFAULTTEXTSIZE" />
+    <Prop Val="255" Nm="%%SCHFILLCOLOR" />
+    <Prop Val="4278190080" Nm="%%SCHPINNAMECOLOR" />
+    <Prop Val="4278190080" Nm="%%SCHPINNUMCOLOR" />
+    <PartList>
+      <Part Id="7627" Name="TL082CP" RefDes="U1" PartType="7400">
+        <Prop Val="https:https://download.siliconexpert.com/pdfs/2017/3/5/5/58/8/323/txn_/manual/p0008a.jpg" Nm="PRODUCT_PHOTOS" />
+        <Prop Val="https://download.siliconexpert.com/pdfs/2008/06/30/semi_ap/cs/nat/ds/nods.pdf" Nm="DATASHEETS" />
+        <Prop Val="Texas Instruments" Nm="%%SCHPARTMANUFACTURER" />
+        <Prop Val="TL082CP" Nm="%%SCHPARTNUM" />
+        <Prop Val="Op Amp Dual GP ±18V 8-Pin PDIP Tube" Nm="DESCRIPTION" />
+        <Prop Val="Texas Instruments" Nm="VENDOR" />
+        <Prop Val="General Purpose Amplifier" Nm="MANUFACTURER TYPE" />
+        <Prop Val="13@±15V" Nm="TYPICAL SLEW RATE - (V/US)" />
+        <Prop Val="No" Nm="MILITARY QUALIFIED" />
+        <Prop Val="BiFET" Nm="PROCESS TECHNOLOGY" />
+        <Prop Val="0.0002@±15V" Nm="MAXIMUM INPUT OFFSET CURRENT - (UA)" />
+        <Prop />
+        <Prop Val="PDIP" Nm="SUPPLIER PACKAGE" />
+        <Prop Val="2" Nm="NUMBER OF CHANNELS PER CHIP" />
+        <Prop />
+        <Prop />
+        <Prop />
+        <Prop Val="Tube" Nm="PACKAGING" />
+        <Prop Val="No" Nm="SHUT DOWN SUPPORT" />
+        <Prop Val="0~70" Nm="OPERATING TEMPERATURE - (°C)" />
+        <Prop Val="No" Nm="AUTOMOTIVE" />
+        <Prop Val="3" Nm="TYPICAL GAIN BANDWIDTH PRODUCT - (MHZ)" />
+        <Prop Val="15@±15V" Nm="MAXIMUM INPUT OFFSET VOLTAGE - (MV)" />
+        <Prop Val="DIP" Nm="STANDARD PACKAGE NAME" />
+        <Prop Val="General Purpose Amplifier" Nm="TYPE" />
+        <Prop Val="8" Nm="PIN COUNT" />
+        <Prop Val="0.0004@±15V" Nm="MAXIMUM INPUT BIAS CURRENT - (UA)" />
+        <Prop Val="U" Nm="%%SCHREFDESPREFIX" />
+        <Prop Val="Amplifiers and Comparators" Nm="%%SCHPARTCATEGORY" />
+        <Prop Val="Op Amps" Nm="%%SCHPARTFAMILY" />
+        <Prop Val="U1" Nm="%%SCHREFDES" />
+        <Sections Id="7628" SetName="" LibGuid="f27475e1-3e6f-4283-854f-f208cb557f57" OwningPart="7627" />
+      </Part>
+    </PartList>
+    <SchPage Id="4" Name="Sheet 1">
+      <Prop Val="220000000bu,170000000bu" Nm="%%DESIGNDEFAULTPAGESIZE" />
+      <Prop Val="12" Nm="%%DESIGNDEFAULTTEXTSIZE" />
+      <Prop Val="4278190335" Nm="%%SCHLINECOLOR" />
+      <Prop Val="255" Nm="%%SCHFILLCOLOR" />
+      <Prop Val="4278190080" Nm="%%SCHPINNAMECOLOR" />
+      <Prop Val="4278190080" Nm="%%SCHPINNUMCOLOR" />
+      <Prop Val="C" Nm="%%SCHPAGEFORMAT" />
+      <Prop Val="133943624bu,85080326bu" Nm="%%SCHPAGEVIEWCENTER" />
+      <Prop Val="159999962bu" Nm="%%SCHPAGEVIEWRADIUS" />
+      <Section Id="7629" SymbolName="TL082_P_8" SectionName="" X="61000000bu" Y="96000000bu" Rot="0" Req="False" SwapId="0" OwningSymbolSet="7628">
+        <Prop Val="TL082CP" Nm="%%SCHPARTNUM" />
+        <Prop Val="https:https://download.siliconexpert.com/pdfs/2017/3/5/5/58/8/323/txn_/manual/p0008a.jpg" Nm="PRODUCT_PHOTOS" />
+        <Prop Val="https://download.siliconexpert.com/pdfs/2008/06/30/semi_ap/cs/nat/ds/nods.pdf" Nm="DATASHEETS" />
+        <Prop Val="Texas Instruments" Nm="%%SCHPARTMANUFACTURER" />
+        <Prop Val="Op Amp Dual GP ±18V 8-Pin PDIP Tube" Nm="DESCRIPTION" />
+        <Prop Val="Texas Instruments" Nm="VENDOR" />
+        <Prop Val="General Purpose Amplifier" Nm="MANUFACTURER TYPE" />
+        <Prop Val="13@±15V" Nm="TYPICAL SLEW RATE - (V/US)" />
+        <Prop Val="No" Nm="MILITARY QUALIFIED" />
+        <Prop Val="BiFET" Nm="PROCESS TECHNOLOGY" />
+        <Prop Val="0.0002@±15V" Nm="MAXIMUM INPUT OFFSET CURRENT - (UA)" />
+        <Prop />
+        <Prop Val="PDIP" Nm="SUPPLIER PACKAGE" />
+        <Prop Val="2" Nm="NUMBER OF CHANNELS PER CHIP" />
+        <Prop />
+        <Prop />
+        <Prop />
+        <Prop Val="Tube" Nm="PACKAGING" />
+        <Prop Val="No" Nm="SHUT DOWN SUPPORT" />
+        <Prop Val="0~70" Nm="OPERATING TEMPERATURE - (°C)" />
+        <Prop Val="No" Nm="AUTOMOTIVE" />
+        <Prop Val="3" Nm="TYPICAL GAIN BANDWIDTH PRODUCT - (MHZ)" />
+        <Prop Val="15@±15V" Nm="MAXIMUM INPUT OFFSET VOLTAGE - (MV)" />
+        <Prop Val="DIP" Nm="STANDARD PACKAGE NAME" />
+        <Prop Val="General Purpose Amplifier" Nm="TYPE" />
+        <Prop Val="8" Nm="PIN COUNT" />
+        <Prop Val="0.0004@±15V" Nm="MAXIMUM INPUT BIAS CURRENT - (UA)" />
+        <Prop Val="U" Nm="%%SCHREFDESPREFIX" />
+        <Prop Val="Amplifiers and Comparators" Nm="%%SCHPARTCATEGORY" />
+        <Prop Val="Op Amps" Nm="%%SCHPARTFAMILY" />
+        <Prop />
+        <Prop />
+        <BitBucket>
+          <Pin Id="7630" X="1000000bu" Y="0bu" Name="1OUT" Num="1" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7631" X="1000000bu" Y="-1000000bu" Name="1IN-" Num="2" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7632" X="1000000bu" Y="-2000000bu" Name="1IN+" Num="3" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7633" X="1000000bu" Y="-3000000bu" Name="VCC-" Num="4" Ori="Left" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7634" X="23000000bu" Y="-3000000bu" Name="2IN+" Num="5" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7635" X="23000000bu" Y="-2000000bu" Name="2IN-" Num="6" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7636" X="23000000bu" Y="-1000000bu" Name="2OUT" Num="7" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="7637" X="23000000bu" Y="0bu" Name="VCC+" Num="8" Ori="Right" Type="Passive" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <SchText Id="7638" String="$%%SCHREFDES" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="4000000bu" />
+          <SchText Id="7639" String="$%%SCHPARTNUM" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="3000000bu" />
+          <SchText Id="7640" String="$%%SCHPARTVALUE" Rot="0" PtHeight="10" Justify="LowerCenter" Invisible="False" X="12000000bu" Y="3000000bu" />
+          <Poly Id="7641">
+            <Crn X="3000000bu" Y="2000000bu" />
+            <Crn X="3000000bu" Y="-5000000bu" />
+            <Crn X="21000000bu" Y="-5000000bu" />
+            <Crn X="21000000bu" Y="2000000bu" />
+            <Crn X="3000000bu" Y="2000000bu" />
+          </Poly>
+        </BitBucket>
+      </Section>
+    </SchPage>
+  </Schematic>
+  <Board Id="2">
+    <Prop Val="In" Nm="%%PCBCURRENTUNITS" />
+    <Prop Val="Top" Nm="%%PCBCURRENTLAYER" />
+    <Prop Val="500000bu,500000bu" Nm="%%PCBGRIDSIZE" />
+    <Prop Val="False" Nm="%%PCBHICONTRAST" />
+    <Prop Val="65312" Nm="%%PCBHICONTRASTCOLOR" />
+    <Prop Val="4279505940" Nm="%%PCBDIMCOLOR" />
+    <Prop Val="AllPickable" Nm="%%PCBPICKFLAGS" />
+    <Prop Val="25000000bu,15000000bu" Nm="%%PCBVIEWCENTER" />
+    <Prop Val="25000000bu" Nm="%%PCBVIEWRADIUS" />
+    <Prop Val="4278255360" Nm="%%PCBGRIDCOLOR" />
+    <Prop Val="3372220415" Nm="%%PCBPINNAMECOLOR" />
+    <Prop Val="3372220415" Nm="%%PCBNETNAMECOLOR" />
+    <Prop Val="4294967040" Nm="%%PCBRATCOLOR" />
+    <Prop Val="True" Nm="%%PCBCOPPERPOUR" />
+    <Prop Val="FR4" Nm="%%PCBBOARDMATERIAL" />
+    <Prop Val="0.062" Nm="%%PCBBOARDTHICKNESS" />
+    <Prop Val="OneOunce" Nm="%%PCBCOPPERWEIGHT" />
+    <Prop Val="Default" Nm="%%PCBFINISH" />
+    <Prop Val="True" Nm="%%PCBADDSOLDERMASK" />
+    <Prop Val="Default" Nm="%%PCBMASKTYPE" />
+    <Prop Val="Default" Nm="%%PCBMASKCOLOR" />
+    <Prop Val="True" Nm="%%PCBTOPSILK" />
+    <Prop Val="True" Nm="%%PCBBOTSILK" />
+    <Prop Val="Default" Nm="%%PCBSILKCOLOR" />
+    <Prop Val="2" Nm="%%PCBLAYERCOUNT" />
+    <Prop Val="False" Nm="%%PCBUSEWIDTHPERLAYER" />
+    <Prop Val="80000bu" Nm="%%PCBDEFAULTTRACEWIDTH" />
+    <Prop Val="30000bu" Nm="%%PCBDEFAULTSPACING" />
+    <Prop Val="30000bu" Nm="%%PCBDEFAULTTHERMALWIDTH" />
+    <Prop Val="135000bu" Nm="%%PCBDEFAULTVIADRILL" />
+    <Prop Val="70000bu" Nm="%%PCBDEFAULTVIAANNULAR" />
+    <Prop Val="50000000000" Nm="%%PCBDEFAULTPOURMINSIZE" />
+    <Prop Val="80000bu" Nm="%%PCBRULESMINTRACE" />
+    <Prop Val="80000bu" Nm="%%PCBRULESMINSPACE" />
+    <Prop Val="135000bu" Nm="%%PCBRULESMINDRILLDIAM" />
+    <Prop Val="2500000bu" Nm="%%PCBRULESMAXDRILLDIAM" />
+    <Prop Val="70000bu" Nm="%%PCBRULESMINANNULAR" />
+    <Prop Val="200000bu" Nm="%%PCBRULESMINDISTTOEDGE" />
+    <Prop Val="False" Nm="%%PCBUSEMICROVIAS" />
+    <Prop Val="False" Nm="%%PCBUSEBLINDVIAS" />
+    <Prop Val="False" Nm="%%PCBUSEBURIEDVIAS" />
+    <Prop Val="False" Nm="%%PCBPLUGVIAS" />
+    <Prop Val="True" Nm="%%PCBTENTVIAS" />
+    <Prop Val="True" Nm="%%PCBREMOVEINNERPADS" />
+    <Prop Val="False" Nm="%%PCBUNCONNECTEDTPS" />
+    <Prop Val="False" Nm="%%PCBBEVELBOARDEDGE" />
+    <Prop Val="False" Nm="%%PCBCONSOLIDATEDRILLS" />
+    <Prop Val="Moderate" Nm="%%PCBPLACERPACKING" />
+    <Prop Val="Medium" Nm="%%PCBPLACEREFFORT" />
+    <Prop Val="RotateAny" Nm="%%PCBPLACERDISCRETEROT" />
+    <Prop Val="DoNotRotate" Nm="%%PCBPLACERCHIPROT" />
+    <Prop Val="False" Nm="%%PCBVIAINPAD" />
+    <Prop Val="False" Nm="%%PCBLARGEDECOUPLINGVIAS" />
+    <Prop Val="EncourageVias" Nm="%%PCBROUTERVIAUSAGE1" />
+    <Prop Val="Normal" Nm="%%PCBROUTERVIAUSAGE2" />
+    <Prop Val="10" Nm="%%PCBROUTERATTEMPTS1" />
+    <Prop Val="50" Nm="%%PCBROUTERATTEMPTS2" />
+    <Prop Val="250000bu" Nm="%%PCBROUTERGRID1" />
+    <Prop Val="250000bu" Nm="%%PCBROUTERGRID2" />
+    <Prop Val="Rats" Nm="%%PCBLAYERNAME" Idx="0" />
+    <Prop Val="3372220160" Nm="%%PCBLAYERCOLOR" Idx="0" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="0" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="0" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="0" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="0" />
+    <Prop Val="Top" Nm="%%PCBLAYERNAME" Idx="1" />
+    <Prop Val="3372154880" Nm="%%PCBLAYERCOLOR" Idx="1" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="1" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="1" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="1" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="1" />
+    <Prop Val="In1" Nm="%%PCBLAYERNAME" Idx="2" />
+    <Prop Val="3355492096" Nm="%%PCBLAYERCOLOR" Idx="2" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="2" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="2" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="2" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="2" />
+    <Prop Val="In2" Nm="%%PCBLAYERNAME" Idx="3" />
+    <Prop Val="3363832063" Nm="%%PCBLAYERCOLOR" Idx="3" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="3" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="3" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="3" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="3" />
+    <Prop Val="In3" Nm="%%PCBLAYERNAME" Idx="4" />
+    <Prop Val="3355486458" Nm="%%PCBLAYERCOLOR" Idx="4" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="4" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="4" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="4" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="4" />
+    <Prop Val="In4" Nm="%%PCBLAYERNAME" Idx="5" />
+    <Prop Val="3372187648" Nm="%%PCBLAYERCOLOR" Idx="5" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="5" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="5" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="5" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="5" />
+    <Prop Val="In5" Nm="%%PCBLAYERNAME" Idx="6" />
+    <Prop Val="3355443455" Nm="%%PCBLAYERCOLOR" Idx="6" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="6" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="6" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="6" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="6" />
+    <Prop Val="In6" Nm="%%PCBLAYERNAME" Idx="7" />
+    <Prop Val="3365495296" Nm="%%PCBLAYERCOLOR" Idx="7" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="7" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="7" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="7" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="7" />
+    <Prop Val="In7" Nm="%%PCBLAYERNAME" Idx="8" />
+    <Prop Val="3364407808" Nm="%%PCBLAYERCOLOR" Idx="8" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="8" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="8" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="8" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="8" />
+    <Prop Val="In8" Nm="%%PCBLAYERNAME" Idx="9" />
+    <Prop Val="3355484250" Nm="%%PCBLAYERCOLOR" Idx="9" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="9" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="9" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="9" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="9" />
+    <Prop Val="In9" Nm="%%PCBLAYERNAME" Idx="10" />
+    <Prop Val="3365929100" Nm="%%PCBLAYERCOLOR" Idx="10" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="10" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="10" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="10" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="10" />
+    <Prop Val="In10" Nm="%%PCBLAYERNAME" Idx="11" />
+    <Prop Val="3362017450" Nm="%%PCBLAYERCOLOR" Idx="11" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="11" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="11" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="11" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="11" />
+    <Prop Val="In11" Nm="%%PCBLAYERNAME" Idx="12" />
+    <Prop Val="3355489450" Nm="%%PCBLAYERCOLOR" Idx="12" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="12" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="12" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="12" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="12" />
+    <Prop Val="In12" Nm="%%PCBLAYERNAME" Idx="13" />
+    <Prop Val="3362043050" Nm="%%PCBLAYERCOLOR" Idx="13" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="13" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="13" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="13" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="13" />
+    <Prop Val="In13" Nm="%%PCBLAYERNAME" Idx="14" />
+    <Prop Val="3368596650" Nm="%%PCBLAYERCOLOR" Idx="14" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="14" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="14" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="14" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="14" />
+    <Prop Val="In14" Nm="%%PCBLAYERNAME" Idx="15" />
+    <Prop Val="3361996970" Nm="%%PCBLAYERCOLOR" Idx="15" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="15" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="15" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="15" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="15" />
+    <Prop Val="In15" Nm="%%PCBLAYERNAME" Idx="16" />
+    <Prop Val="3355463850" Nm="%%PCBLAYERCOLOR" Idx="16" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="16" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="16" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="16" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="16" />
+    <Prop Val="In16" Nm="%%PCBLAYERNAME" Idx="17" />
+    <Prop Val="3362017380" Nm="%%PCBLAYERCOLOR" Idx="17" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="17" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="17" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="17" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="17" />
+    <Prop Val="In17" Nm="%%PCBLAYERNAME" Idx="18" />
+    <Prop Val="3362017380" Nm="%%PCBLAYERCOLOR" Idx="18" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="18" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="18" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="18" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="18" />
+    <Prop Val="In18" Nm="%%PCBLAYERNAME" Idx="19" />
+    <Prop Val="3368570980" Nm="%%PCBLAYERCOLOR" Idx="19" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="19" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="19" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="19" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="19" />
+    <Prop Val="In19" Nm="%%PCBLAYERNAME" Idx="20" />
+    <Prop Val="3355489280" Nm="%%PCBLAYERCOLOR" Idx="20" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="20" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="20" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="20" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="20" />
+    <Prop Val="In20" Nm="%%PCBLAYERNAME" Idx="21" />
+    <Prop Val="3355463780" Nm="%%PCBLAYERCOLOR" Idx="21" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="21" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="21" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="21" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="21" />
+    <Prop Val="In21" Nm="%%PCBLAYERNAME" Idx="22" />
+    <Prop Val="3355463880" Nm="%%PCBLAYERCOLOR" Idx="22" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="22" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="22" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="22" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="22" />
+    <Prop Val="In22" Nm="%%PCBLAYERNAME" Idx="23" />
+    <Prop Val="3368550450" Nm="%%PCBLAYERCOLOR" Idx="23" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="23" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="23" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="23" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="23" />
+    <Prop Val="In23" Nm="%%PCBLAYERNAME" Idx="24" />
+    <Prop Val="3361996950" Nm="%%PCBLAYERCOLOR" Idx="24" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="24" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="24" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="24" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="24" />
+    <Prop Val="In24" Nm="%%PCBLAYERNAME" Idx="25" />
+    <Prop Val="3355443350" Nm="%%PCBLAYERCOLOR" Idx="25" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="25" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="25" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="25" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="25" />
+    <Prop Val="In25" Nm="%%PCBLAYERNAME" Idx="26" />
+    <Prop Val="3368588970" Nm="%%PCBLAYERCOLOR" Idx="26" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="26" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="26" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="26" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="26" />
+    <Prop Val="In26" Nm="%%PCBLAYERNAME" Idx="27" />
+    <Prop Val="3362035370" Nm="%%PCBLAYERCOLOR" Idx="27" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="27" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="27" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="27" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="27" />
+    <Prop Val="In27" Nm="%%PCBLAYERNAME" Idx="28" />
+    <Prop Val="3355481770" Nm="%%PCBLAYERCOLOR" Idx="28" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="28" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="28" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="28" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="28" />
+    <Prop Val="In28" Nm="%%PCBLAYERNAME" Idx="29" />
+    <Prop Val="3368601670" Nm="%%PCBLAYERCOLOR" Idx="29" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="29" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="29" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="29" />
+    <Prop Val="Vert" Nm="%%PCBROUTERLAYERDIR" Idx="29" />
+    <Prop Val="Bot" Nm="%%PCBLAYERNAME" Idx="30" />
+    <Prop Val="3355471359" Nm="%%PCBLAYERCOLOR" Idx="30" />
+    <Prop Val="70000bu" Nm="%%PCBLAYERTRACEWIDTH" Idx="30" />
+    <Prop Val="False" Nm="%%PCBLAYERISPLANE" Idx="30" />
+    <Prop Val="True" Nm="%%PCBROUTERLAYERENABLED" Idx="30" />
+    <Prop Val="Horz" Nm="%%PCBROUTERLAYERDIR" Idx="30" />
+    <Prop Val="Top Silk" Nm="%%PCBLAYERNAME" Idx="31" />
+    <Prop Val="3372220415" Nm="%%PCBLAYERCOLOR" Idx="31" />
+    <Prop Val="Bottom Silk" Nm="%%PCBLAYERNAME" Idx="32" />
+    <Prop Val="3363798911" Nm="%%PCBLAYERCOLOR" Idx="32" />
+    <Prop Val="Top Assy" Nm="%%PCBLAYERNAME" Idx="33" />
+    <Prop Val="4294967040" Nm="%%PCBLAYERCOLOR" Idx="33" />
+    <Prop Val="Bottom Assy" Nm="%%PCBLAYERNAME" Idx="34" />
+    <Prop Val="3363798784" Nm="%%PCBLAYERCOLOR" Idx="34" />
+    <Prop Val="Top Mask" Nm="%%PCBLAYERNAME" Idx="35" />
+    <Prop Val="3355489280" Nm="%%PCBLAYERCOLOR" Idx="35" />
+    <Prop Val="Botttom Mask" Nm="%%PCBLAYERNAME" Idx="36" />
+    <Prop Val="3355463680" Nm="%%PCBLAYERCOLOR" Idx="36" />
+    <Prop Val="Top Paste" Nm="%%PCBLAYERNAME" Idx="37" />
+    <Prop Val="3367239860" Nm="%%PCBLAYERCOLOR" Idx="37" />
+    <Prop Val="Bottom Paste" Nm="%%PCBLAYERNAME" Idx="38" />
+    <Prop Val="3361996900" Nm="%%PCBLAYERCOLOR" Idx="38" />
+    <Prop Val="Fab1" Nm="%%PCBLAYERNAME" Idx="39" />
+    <Prop Val="4271073941" Nm="%%PCBLAYERCOLOR" Idx="39" />
+    <Prop Val="Fab2" Nm="%%PCBLAYERNAME" Idx="40" />
+    <Prop Val="4268397960" Nm="%%PCBLAYERCOLOR" Idx="40" />
+    <Prop Val="Last Pcb Layer" Nm="%%PCBLAYERNAME" Idx="41" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="41" />
+    <Prop Val="Footprint Surface" Nm="%%PCBLAYERNAME" Idx="42" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="42" />
+    <Prop Val="Footprint Inner" Nm="%%PCBLAYERNAME" Idx="43" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="43" />
+    <Prop Val="Footprint Plane" Nm="%%PCBLAYERNAME" Idx="44" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="44" />
+    <Prop Val="Footprint Mask" Nm="%%PCBLAYERNAME" Idx="45" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="45" />
+    <Prop Val="Footprint Silk" Nm="%%PCBLAYERNAME" Idx="46" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="46" />
+    <Prop Val="Footprint Paste" Nm="%%PCBLAYERNAME" Idx="47" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="47" />
+    <Prop Val="Footprint Assy" Nm="%%PCBLAYERNAME" Idx="48" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="48" />
+    <Prop Val="Footprint Fab" Nm="%%PCBLAYERNAME" Idx="49" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="49" />
+    <Prop Val="Footprint Court" Nm="%%PCBLAYERNAME" Idx="50" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="50" />
+    <Prop Val="Footprint Height" Nm="%%PCBLAYERNAME" Idx="51" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="51" />
+    <Prop Val="Last Footprint Layer" Nm="%%PCBLAYERNAME" Idx="52" />
+    <Prop Val="0" Nm="%%PCBLAYERCOLOR" Idx="52" />
+    <Prop Val="All Layers" Nm="%%PCBLAYERNAME" Idx="53" />
+    <Prop Val="3372220415" Nm="%%PCBLAYERCOLOR" Idx="53" />
+    <Poly Id="90" Name="" Type="BoardOutline" Layer="AllLayers" LineWidth="250000bu">
+      <Crn X="0bu" Y="0bu" />
+      <Crn X="50000000bu" Y="0bu" />
+      <Crn X="50000000bu" Y="30000000bu" />
+      <Crn X="0bu" Y="30000000bu" />
+      <Crn X="0bu" Y="0bu" />
+    </Poly>
+  </Board>
+  <RulesDeck ServiceId="0" MaxLayers="54" MinBdSizeDimA="0" MinBdSizeDimB="0" MaxBdSizeDimA="2147483647" MaxBdSizeDimB="2147483647" MinTrace="80000" MinSpace="80000" MinDrillDiam="135000" MaxDrillDiam="2500000" MinAnnular="70000" MaxDrillsSqIn="0" MinRoutingBitDiam="0" MinDistToEdge="200000" />
+  <SchemeitBOMParts />
+</ElectronicDesign>
