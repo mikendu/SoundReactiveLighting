@@ -58,7 +58,14 @@ ISR(ADC_vect)
 {
     //when new ADC value ready
     incomingAudio = ADCH;//update the variable incomingAudio with new value from A0 (between 0 and 255)
-    
+
+    Serial.print(0);  // To freeze the lower limit
+    Serial.print(" ");
+    Serial.print(255);  // To freeze the upper limit
+    Serial.print(" ");
+    Serial.print(127);  // Midway
+    Serial.print(" ");
+    Serial.println(incomingAudio);
     if(incomingAudio == 0 || incomingAudio == 255)
     {
         clipping = true;
@@ -66,6 +73,7 @@ ISR(ADC_vect)
         digitalWrite(clipPin, HIGH);
         //ledColor = CHSV(0, 0, 255);
     }
+    /*
 
     int slope = 0;
     
@@ -114,7 +122,7 @@ ISR(ADC_vect)
     prev = incomingAudio;
 
     //ledColor = CHSV(0, 0, 255);
-    //ledStrip.show(ledColor);
+    //ledStrip.show(ledColor);*/
 }
 
 
