@@ -7,6 +7,14 @@
 #######################################
 
 AnalogLED	KEYWORD1
+MillisecondTimer	KEYWORD1
+LightMode	KEYWORD1
+Potentiometer	KEYWORD1
+LightBox	KEYWORD1
+CustomDisplay	KEYWORD1
+Bundle	KEYWORD1
+Pair	KEYWORD1
+LightUtils  KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -17,6 +25,16 @@ AnalogLED	KEYWORD1
 
 # Colors
 show	KEYWORD2
+update	KEYWORD2
+elapsed	KEYWORD2
+value	KEYWORD2
+scaledValue	KEYWORD2
+initialize	KEYWORD2
+clear	KEYWORD2
+scaledValue	KEYWORD2
+value1	KEYWORD2
+value2	KEYWORD2
+value3	KEYWORD2
 
 
 
@@ -28,3 +46,7 @@ show	KEYWORD2
 PIN_R	LITERAL1
 PIN_G	LITERAL1
 PIN_B	LITERAL1
+
+Fade	LITERAL1
+Dynamic	LITERAL1
+Hue 	LITERAL1

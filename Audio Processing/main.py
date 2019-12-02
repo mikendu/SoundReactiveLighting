@@ -13,12 +13,13 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 48000
 CHUNK = 32
-#BUFFER_SIZE = 32768
-BUFFER_SIZE = 4096
+BUFFER_SIZE = 32768
+#BUFFER_SIZE = 4096
 AMPLITUDE_LIM = 32768
+WINDOW_SIZE = 128
 
 
-PLOT_SIZE = 700
+PLOT_SIZE = 400
 MARGIN_X = 125
 MARGIN_Y = 125
 
@@ -69,26 +70,28 @@ print("Showing plot...")
 class Graph():
 
 
-    def __init__(self, canvas, transform, axisBounds, offset = None, origin = False):
+    def __init__(self, canvas, transform, axisBounds, numPoints = BUFFER_SIZE, axisOffset = None, axisScale = (1, 1), origin = False):
         
-        offsetX = 0 if offset is None else offset[0]
-        offsetY = 0 if offset is None else offset[1]
-        self.xAxis = scene.visuals.Axis(pos = [(0 + offsetX, 0 + offsetY), (1 + offsetX, 0 + offsetY)], 
+        offsetX = 0 if axisOffset is None else axisOffset[0]
+        offsetY = 0 if axisOffset is None else axisOffset[1]
+        scaleX = axisScale[0]
+        scaleY = axisScale[1]
+        self.xAxis = scene.visuals.Axis(pos = [(0 + offsetX, 0 + offsetY), (scaleX + offsetX, 0 + offsetY)], 
                                         domain = (axisBounds['xmin'], axisBounds['xmax']), anchors = ('center', 'middle'),
                                         parent = canvas, tick_color = 'k', text_color = 'k', axis_color = 'k',
                                         tick_direction = (0.0, -1.0), tick_label_margin = 20, major_tick_length = 15, 
                                         minor_tick_length = 5.0, axis_label = axisBounds['labelx'], axis_label_margin = 60)
 
         
-        self.yAxis = scene.visuals.Axis(pos = [(0 + offsetX, 0 + offsetY), (0 + offsetX, 1 + offsetY)], 
+        self.yAxis = scene.visuals.Axis(pos = [(0 + offsetX, 0 + offsetY), (0 + offsetX, scaleY + offsetY)], 
                                         domain = (axisBounds['ymin'], axisBounds['ymax']), anchors = ('center', 'bottom'),
                                         parent = canvas, tick_color = 'k', text_color = 'k', axis_color = 'k',
                                         tick_direction = (-1.0, 0.0), tick_label_margin = 35, major_tick_length = 15, 
                                         minor_tick_length = 5.0, axis_label = axisBounds['labely'], axis_label_margin = 80)
         
         defaultPos = numpy.array([(0.0, 0.0), (1.0, 0.0)])
-        deltaX = 1.0 / float(BUFFER_SIZE)
-        self.line = scene.visuals.ScrollingLines(n_lines = 1, line_size = BUFFER_SIZE, dx = deltaX,
+        deltaX = 1.0 / float(numPoints)
+        self.line = scene.visuals.ScrollingLines(n_lines = 1, line_size = numPoints, dx = deltaX,
                                                 columns = 1, cell_size = (1, 1), color = [0, 0, 0, 1], parent = canvas)
         
         subvisuals = [self.xAxis, self.yAxis, self.line]
@@ -109,18 +112,20 @@ class Graph():
 
 
 
-windowSizeX = (2 * PLOT_SIZE) + (3 * MARGIN_X)
+windowSizeX = (3 * PLOT_SIZE) + (4 * MARGIN_X)
 windowSizeY = (2 * PLOT_SIZE) + (3 * MARGIN_Y)
 window = scene.canvas.SceneCanvas(  title = "Audio Visualizer", 
                                     keys = 'interactive',
                                     size = (windowSizeX, windowSizeY), 
-                                    position = (3840 + 1920 - windowSizeX / 2.0, 1080 - windowSizeY / 2.0), 
+                                    position = (0 + 1920 - windowSizeX / 2.0, 1080 - windowSizeY / 2.0), 
                                     resizable = False, bgcolor = "#eaebed")
 
 waveform = Graph(   canvas = window.scene, 
                     origin = True,
-                    offset = (0, -0.5),
-                    transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE, 1), 
+                    axisOffset = (0, -1),
+                    axisScale = (1, 2),
+                    numPoints = BUFFER_SIZE,
+                    transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE * 0.5, 1), 
                                                                 translate = (MARGIN_X, MARGIN_Y + (PLOT_SIZE / 2.0), 0)),
                     axisBounds = {  'xmin' : BUFFER_SIZE, 
                                     'xmax' : 0,
@@ -130,7 +135,8 @@ waveform = Graph(   canvas = window.scene,
                                     'labely' : 'amplitude'})
 
 
-amplitude = Graph(  canvas = window.scene, 
+peak = Graph(  canvas = window.scene, 
+                    numPoints = BUFFER_SIZE,
                     transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE, 1), 
                                                                 translate = ((2.0 * MARGIN_X) + PLOT_SIZE, MARGIN_Y + PLOT_SIZE, 0)),
                     axisBounds = {  'xmin' : BUFFER_SIZE, 
@@ -138,11 +144,34 @@ amplitude = Graph(  canvas = window.scene,
                                     'ymin' : 0,
                                     'ymax' : 1.0,
                                     'labelx' : 'samples',
+                                    'labely' : 'amplitude - peak (dB)'})
+
+rms = Graph(  canvas = window.scene, 
+                    numPoints = BUFFER_SIZE,
+                    transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE, 1), 
+                                                                translate = ((3.0 * MARGIN_X) + (2.0 * PLOT_SIZE), MARGIN_Y + PLOT_SIZE, 0)),
+                    axisBounds = {  'xmin' : BUFFER_SIZE, 
+                                    'xmax' : 0,
+                                    'ymin' : 0,
+                                    'ymax' : 1.0,
+                                    'labelx' : 'samples',
                                     'labely' : 'amplitude - rms (dB)'})
 
-frequency = Graph(  canvas = window.scene,
+beats = Graph(      canvas = window.scene, 
+                    numPoints = BUFFER_SIZE,
                     transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE, 1), 
                                                                 translate = (MARGIN_X, (2.0 * MARGIN_Y) + (2.0 * PLOT_SIZE), 0)),
+                    axisBounds = {  'xmin' : BUFFER_SIZE, 
+                                    'xmax' : 0,
+                                    'ymin' : 0,
+                                    'ymax' : 1.0,
+                                    'labelx' : 'samples',
+                                    'labely' : 'beat (binary)'})
+
+frequency = Graph(  canvas = window.scene,
+                    numPoints = 1024,
+                    transform = visuals.transforms.STTransform( scale = (PLOT_SIZE, -PLOT_SIZE, 1), 
+                                                                translate = ((2.0 * MARGIN_X) + PLOT_SIZE, (2.0 * MARGIN_Y) + (2.0 * PLOT_SIZE), 0)),
                     axisBounds = {  'xmin' : 20, 
                                     'xmax' : 20000,
                                     'ymin' : 0,
@@ -150,22 +179,108 @@ frequency = Graph(  canvas = window.scene,
                                     'labelx' : 'frequency (Hz)',
                                     'labely' : 'amplitude (dB)'})
 
-lightColor = scene.visuals.Rectangle(   center = (PLOT_SIZE * 1.5 + MARGIN_X * 2, PLOT_SIZE * 1.5 + MARGIN_Y * 2), 
+lightColor = scene.visuals.Rectangle(   center = (PLOT_SIZE * 2.5 + MARGIN_X * 3, PLOT_SIZE * 1.5 + MARGIN_Y * 2), 
                                         color = '#a7b8d3', height = PLOT_SIZE, width = PLOT_SIZE, parent = window.scene)
 
 
 #buffer = RingBuffer(capacity = BUFFER_SIZE, dtype = numpy.int16)
+ledColor = color.Color()
+ledColor.hsv = (0.0, 1.0, 1.0)
+hue = 0.0
+value = 1.0
+saturation = 1.0
+globalSpeed = 1.0
+
+
+class SoundProcessor:
+
+    def __init__(self):
+        pass
+
+    def calculateRMS(self, samples, start, length):
+        averageSquared = 0
+        for i in range(0, length):
+            sampleSquared = pow(samples[start + i], 2.0)
+            averageSquared += ((1.0 / length) * sampleSquared)
+        
+        rms = pow(averageSquared, 0.5)
+        return numpy.full((1, length), rms)
+
+    def calculatePeaks(self, samples, start, length):
+        peak = 0
+        for i in range(0, length):
+            sample = abs(samples[start + i])
+            peak = sample if sample > peak else peak
+
+        return numpy.full((1, length), peak)
+
+    def getRMS(self, samples, windowSize, bufferLen):
+        return self.windowAction(samples, windowSize, bufferLen, self.calculateRMS)
+
+    def getPeaks(self, samples, windowSize, bufferLen):
+        return self.windowAction(samples, windowSize, bufferLen, self.calculatePeaks)
+
+    def getAverage(self, samples, startIndex, length):
+        averge = 0.0
+        for i in range(0, length):
+            averge += ((1.0 / length) * samples[startIndex + i])
+
+        return averge
+
+    def windowAction(self, samples, windowSize, bufferLen, function):
+        totalResult = None
+        remaining = bufferLen
+        startIndex = 0
+
+        while remaining > 0:
+            window = min(windowSize, remaining)
+            currentResult = function(samples, startIndex, window)
+
+            if totalResult is None:
+                totalResult = currentResult
+            else:
+                totalResult = numpy.concatenate([totalResult, currentResult], axis = 1)
+
+            remaining -= window
+            startIndex += window
+
+        return totalResult
+
+processor = SoundProcessor()
 
 def update(ev):
+    global globalSpeed
+
+    # Read Input
     bytesAvailable = stream.get_read_available()
     if(bytesAvailable <= 0):
         return
 
     data = stream.read(bytesAvailable)
-    sample = numpy.frombuffer(data, dtype = numpy.int16)
+    samples = numpy.frombuffer(data, dtype = numpy.int16)
+    normalized = numpy.multiply(samples, 1 / (1.0 * AMPLITUDE_LIM))
 
-    waveData = numpy.multiply(sample, 1 / (2.0 * AMPLITUDE_LIM))
-    waveform.rollData(numpy.array([waveData]))
+    # Process audio
+    processingWindow = 256
+    peaks = processor.getPeaks(normalized, processingWindow, bytesAvailable)
+    rmsData = processor.getRMS(normalized, processingWindow, bytesAvailable)
+
+    # Update Graphs
+    waveform.rollData( numpy.array([normalized]) )
+    peak.rollData( peaks )
+    rms.rollData( rmsData )
+
+    # Update lights
+    averagePower = processor.getAverage(peaks[0], bytesAvailable - processingWindow - 1, processingWindow)
+    
+    h, s, v = ledColor.hsv
+    #globalSpeed = 1.0 + (100.0 * averagePower)
+    #saturation = 1.0 - pow(averagePower, 0.1)
+    h = (h + (0.7 * globalSpeed)) % 360
+    value = 1.0 - averagePower
+    ledColor.hsv = (h, saturation, value)
+    lightColor.color = ledColor
+
     #buffer.extend(sample)"""
 
 

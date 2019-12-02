@@ -1,0 +1,86 @@
+Attachements
+------------------------
+
+DONE: Audio Shield: 7 PINS 
+- 23 MCLK
+- 21 BCLK
+- 20 LRCLK
+- 8 DOUT
+- 7 DIN
+- 19 Control Clock
+- 18 Control Data
+- Needs GND & 3.3V
+- Taken care of via shield
+
+Rev. B:
+- MCLK: 23 -> 11
+- BCLK: 21 -> 9
+- LRCLK: 20 -> 23
+- DIN: 7 -> 22
+- DOUT: 8 -> 13
+- SCL: 19 -> 19
+- SDA: 18 -> 18
+
+- MISO: 
+- MOSI: 11 -> 7
+- SCK: 13 -> 14
+
+
+SPI Display: 6 PINS
+- 9  DC
+- 10 CS
+- 11 MOSI
+- 12 MISO
+- 13 SCK
+- 14 RST
+- LED PIN to 3.3V via 100 Ohm Resistor
+- Needs GND & 3.3V
+
+LED Control
+- 3 Analog Output Pins (PWM)
+- 0 R
+- 1 G
+- 2 B
+- Needs GND connection as well
+
+Potentiometer #1
+- 1 Analog Input Pin (15)
+- Needs GND & 3.3V
+
+Potentiometer #2
+- 1 Analog Input Pin (16)
+- Needs GND & 3.3V
+
+Push Button
+- 1 Digital Input Pin (17)
+- Needs GND & 3.3V + 5.1K Ohm Resistor
+
+
+
+Resistors
+---------------
+- 100 Ohm for LED Pin of TFT display
+- 5.1K Ohm for Push Button
+- 10K Ohm for LED/MOSFETS
+
+
+
+External Connections
+------------------------
+
+Teensy Power In: +5V & Ground (Barrel Jack, 2 Pins, double gauge wire)
+LED Power In: +24V & GND (Barrel Jack, 2 Pins, double gauge wire)
+Stereo Audio: 3.5mm Jack
+LED Signal Out: RGB & +24V (4 Pins)
+
+USB In??
+Stereo Audio Out??
+
+
+External Components
+------------------------
+LED Power Button
+Potentiometer #1
+Potentiometer #2
+Push Button
+TFT Display
