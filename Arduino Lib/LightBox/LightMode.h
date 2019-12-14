@@ -5,7 +5,8 @@ enum LightMode
 {
     Dynamic = 0,
     Fade = 1,
-    Hue = 2
+    Hue = 2,
+    Psycho = 3,
 };
 
 #endif

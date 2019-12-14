@@ -83,7 +83,7 @@ void CustomDisplay::drawAudio(  float* data, byte dataLen,
 
     for(uint8_t i = 0; i < len; i++) 
     {
-        float clamped = min(data[i], 1.0f);
+        float clamped = min(data[i] * 1.85f, 1.0f);
         uint16_t x = 150 + (7 * i);
         this->drawEQ(i, clamped, x, top, 4, barHeight);
         
@@ -127,6 +127,16 @@ void CustomDisplay::sliderText(const char* text)
 {       
     uint16_t width = this->display->measureTextWidth(text);
     uint16_t height = this->display->measureTextHeight(text);
+    uint16_t x = (320 - width) / 2;
+    
+    this->display->setCursor(x, 200);
+    this->display->print(text);
+}
+
+void CustomDisplay::debugText(const char* text)
+{       
+    this->display->fillRect(100, 190, 120, 30, ILI9341_BLACK);
+    uint16_t width = this->display->measureTextWidth(text);
     uint16_t x = (320 - width) / 2;
     
     this->display->setCursor(x, 200);

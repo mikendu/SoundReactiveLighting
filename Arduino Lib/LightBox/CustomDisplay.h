@@ -31,6 +31,7 @@ public:
                     float peakLeft, float peakRight, float peakMiddle);
     void drawSlider(float value, bool color = false);    
     void sliderText(const char* text);
+    void debugText(const char* text);
 
 private:
 

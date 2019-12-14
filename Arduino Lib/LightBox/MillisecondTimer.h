@@ -11,6 +11,7 @@ public:
     static void update();
     static float elapsed();
     static float elapsedSeconds();
+    static unsigned long timestamp();
 
 private:
 

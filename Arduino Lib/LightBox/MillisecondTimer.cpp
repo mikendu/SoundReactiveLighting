@@ -35,3 +35,7 @@ float MillisecondTimer::elapsedSeconds()
     return elapsed() / 1000.0f;
 }
 
+unsigned long MillisecondTimer::timestamp()
+{
+    return time;
+}

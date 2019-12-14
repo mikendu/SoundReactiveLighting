@@ -1,8 +1,8 @@
 #define DEFAULT_UPDATE_SPEED 0.0001f
+//#define DEBUG_MODE
 
 #include <TeensyThreads.h>
 #include <LightBox.h>
-//#include <LightboxTemporary.h>
 #include <Bounce2.h>
 
 #include <Audio.h>
@@ -53,8 +53,14 @@ Potentiometer* activeSlider = nullptr;
 
 CustomDisplay screen = CustomDisplay();
 Bundle peakData = Bundle();
+
 float eqData[16] = { 0 };
 float fullSpectrum[512] = { 0 };
+
+#ifdef DEBUG_MODE
+char textBuffer[32] = { 0 };
+uint16_t textLength = 0;
+#endif
 
 bool adjustmentMode = false;
 float adjustmentTimer = 0.0f;
@@ -65,22 +71,25 @@ bool coloredSlider = false;
 // LED Lighting
 ///////////////////////////////////
 
-CHSV ledColor = CHSV();
 AnalogLED ledStrip = AnalogLED(2, 1, 0);
 LightMode lightMode = LightMode::Dynamic;
 
 float updateSpeed = DEFAULT_UPDATE_SPEED;
 float updateCounter = 0.0f;
 
-DecayTimer dimTimer = DecayTimer(100);
-DecayTimer speedTimer = DecayTimer(100);
-DecayTimer kickDim = DecayTimer(100, 1.0f);
-DecayTimer kickDesaturate = DecayTimer(300, 0.7f);
+ColorCycler colorCycler = ColorCycler();
+BeatAnalyzer beatAnalyzer = BeatAnalyzer();
+KickTimer kickEffectTimer = KickTimer(10, 10, 180);
+float highAverage = 0.0f;
+float bassAverage = 0.0f;
+float powerAverage = 0.0f;
 
 HoldTimer releaseTimer = HoldTimer(0.0f, 200, 1000);
-SinusoidTimer idleHue = SinusoidTimer(14456);
-SinusoidTimer idleSat = SinusoidTimer(17856);
-SinusoidTimer idleBrightness = SinusoidTimer(30356);
+DecayTimer saturationTimer = DecayTimer(400);
+
+SinusoidTimer hueCycle = SinusoidTimer(14456);
+SinusoidTimer saturationCycle = SinusoidTimer(17856);
+SinusoidTimer brightnessCycle = SinusoidTimer(30356);
 
 
 void setup() 
@@ -93,6 +102,7 @@ void setup()
     /// --- AUDIO --- ///
     mixer.gain(0, 0.5);
     mixer.gain(1, 0.5);
+    analyzer.windowFunction(AudioWindowHanning1024);
     
     AudioMemory(16);
     audioControl.enable();
@@ -146,6 +156,10 @@ void displayThread()
         else
             screen.drawAudio(eqData, 16, peakData.value1, peakData.value2, peakData.value3);
 
+#ifdef DEBUG_MODE
+        screen.debugText(textBuffer);
+#endif
+
         // Target a ~60 FPS Update Rate
         threads.delay(18);
 
@@ -176,6 +190,11 @@ void setMode(LightMode mode)
             screen.drawTitle("Mode: Hue");
             break;
 
+        case LightMode::Psycho:
+            updateSpeed = DEFAULT_UPDATE_SPEED;
+            screen.drawTitle("Mode: Psycho");
+            break;
+
         default:
             break;
     }
@@ -190,15 +209,6 @@ void updateAudio()
 
     if (analyzer.available())
     {
-        /*uint8_t startBin = 0;
-        for(uint8_t i = 0; i < 16; i++)
-        {
-            uint8_t binSize = LogarithmicBinSizes[i];
-            uint8_t endBin = startBin + binSize;
-            float power = analyzer.read(startBin, endBin);
-            eqData[i] = power;
-            startBin += binSize;
-        }*/
         for(uint16_t i = 0; i < 512; i++)
         {
             float power = analyzer.read(i);
@@ -208,6 +218,7 @@ void updateAudio()
         }
     }
 }
+float rollingPower = 0.0f;
 
 void updateLights()
 {
@@ -218,68 +229,109 @@ void updateLights()
         case LightMode::Dynamic:
         {
             releaseTimer.update(peakData.value3);
-            float interpolation = releaseTimer.value();
-            float multiplier = 0.25f + (2.25f * parameter);
-            
-            uint8_t hue, sat, val;
-            float colorBrightness;
+            float interpolation =  releaseTimer.value();
+            beatAnalyzer.update(fullSpectrum, peakData);
 
-            /// --- IDLE STATE --- ///
-            idleHue.update(multiplier);
-            idleSat.update(multiplier);
-            idleBrightness.update(multiplier);
+            rollingPower = LightUtils::rollingAverage(rollingPower, beatAnalyzer.weightedPower(), 0.1f);
+            float power = rollingPower;
+            float bassPower = beatAnalyzer.bassPower();
+            float bassCenter = beatAnalyzer.bassCenter();
+            float highPower = beatAnalyzer.highPower();
+            float kick = beatAnalyzer.kickPower();  
+            kickEffectTimer.update(kick);     
+
+ 
+
+            // -- IDLE STATE -- //
+
+            powerAverage = LightUtils::rollingAverage(powerAverage, power, 0.00009f);
+            float multiplier = 0.43f + (1.3f * powerAverage);
+            //powerAverage = min(powerAverage, power);
             
-            hue = (uint8_t) (255 * idleHue.value());
-            sat = (uint8_t) (255 * idleSat.value());
-            val = 255;
-            colorBrightness = idleBrightness.scaledValue(0.3f, 0.4f);
+            
+            hueCycle.update(multiplier);
+            saturationCycle.update(multiplier);
+            brightnessCycle.update(multiplier);
+            
+            uint8_t hue = (uint8_t) round(255 * hueCycle.value());
+            uint8_t activeSat = (uint8_t) round(255 * saturationCycle.scaledValue(0.6f, 0.8f));
+            uint8_t idleSat = (uint8_t) round(255 * saturationCycle.scaledValue(0.25f, 0.75f));
+            uint8_t val = 255;
+
+            CHSV idleColor = CHSV(hue, idleSat, val);
+            float idleBrightness = brightnessCycle.scaledValue(0.7f * parameter, 1.0f * parameter);
+    
+            CHSV currentColor = idleColor;
+            float currentBrightness = idleBrightness;
             
             if (interpolation < 1.0f)
             {
+                currentBrightness = 1.0f;
+                currentColor = CHSV(hue, activeSat, val);
                 
-                float speedScale = 0.25f + (parameter * 1.5f);   
-                speedTimer.update(peakData.value3);         
-                updateSpeed = DEFAULT_UPDATE_SPEED + (1.5f * DEFAULT_UPDATE_SPEED * speedTimer.value());
-                updateSpeed *= speedScale;
-
-                float totalPower = LightUtils::sum(fullSpectrum, 512) / 16;
+                saturationTimer.update(LightUtils::clamp(power + powerAverage, 0.0f, 1.0f));
+                uint8_t boostedSaturation = (uint8_t)round(LightUtils::lerp(currentColor.sat, 255, saturationTimer.value()));
+                currentColor = CHSV(currentColor.hue, boostedSaturation, currentColor.val);
                 
-                dimTimer.update(peakData.value3 * totalPower);
-                float activeBrightness = 1.0f - dimTimer.value();
-                /*
-                float kickPower = eqData[0] + eqData[1];
-                kickPower *= kickPower;
+                // -- GENERAL -- //
+
+                //float powerScaling = LightUtils::lerp(1.25f, 1.0f, pow(powerAverage, 0.575f));
+                float totalScaling = LightUtils::clamp(0.5f + (powerAverage * 0.8f), 0.0f, 1.0f);
+                float dim = 1.0f - power;
+                currentBrightness = totalScaling * dim;
                 
-                kickDim.update(kickPower);
-                kickDesaturate.update(kickPower);
-
-                float saturationOffset = (100 * idleSat.value());
-                uint8_t h = (uint8_t) round(updateCounter * 255.0f);
-                float s = LightUtils::clamp(255 * (1.0f - kickDesaturate.value()) - saturationOffset, 0, 255);
-                float v = LightUtils::clamp(255 * (1.0f - kickDim.value()), 0, 255);*/
-                uint8_t h = (uint8_t) round(updateCounter * 255.0f);
-                float s = 255;
-                float v = 255;
-
-                if(interpolation > 0.0f)
-                {
-                    hue = (uint8_t)LightUtils::lerp(h, hue, interpolation);
-                    sat = (uint8_t)LightUtils::lerp(s, sat, interpolation);
-                    val = (uint8_t)LightUtils::lerp(v, val, interpolation);
-                    colorBrightness = LightUtils::lerp(activeBrightness, colorBrightness, interpolation);
+                
+                // -- BASS -- //
+                
+                bassAverage = LightUtils::rollingAverage(bassAverage, bassPower, 0.00009f);
+                bassAverage = min(bassAverage, bassPower);
+                
+                float bassFactor = (bassPower * 0.325f) + (0.25f * bassAverage);   
+                float bassBrighten = (bassPower * 0.07f) + (0.65f * bassAverage);         
+                uint8_t bassBlend = (uint8_t)round(255 * bassFactor);
+                
+                float bassFrequency = LightUtils::lerp(37.0f, 51.0f, bassCenter);
+                CHSV bassEffect = ledStrip.flicker(currentColor, bassFrequency);
+                
+                currentColor = blend(currentColor, bassEffect, bassBlend);
+                currentBrightness = LightUtils::lerp(currentBrightness, 1.0f, bassBrighten);
+    
+                
+                // -- HIGH -- //
+    
+                highAverage = LightUtils::rollingAverage(highAverage, highPower, 0.00009f);
+                highAverage = min(highAverage, highPower);
+                
+                float highFactor = (highPower * 0.12f) + (highAverage * 0.36f);
+                uint8_t highBlend = (uint8_t)round(255 * highFactor);    
+                        
+                CHSV highEffect = colorCycler.randomColor();            
+                currentColor = blend(currentColor, highEffect, highBlend);
+                float overBright = LightUtils::clamp(currentBrightness * 2.0f, 0.0f, 1.0f);
+                currentBrightness = LightUtils::lerp(currentBrightness, overBright, highAverage * 0.72f);
+                
+    
+                // -- KICK -- //
+                if(kickEffectTimer.enabled())
+                {                
+                    uint8_t sat = (uint8_t)round(currentColor.sat * kickEffectTimer.saturation());  
+                    currentColor = CHSV(currentColor.hue, sat, currentColor.val);
+                    currentBrightness = kickEffectTimer.value();
                 }
-                else
-                {
-                    hue = (uint8_t)h;
-                    sat = (uint8_t)s;
-                    val = (uint8_t)v;
-                    colorBrightness = activeBrightness;
-                }
+
+                uint8_t finalBlend = (uint8_t)round(255 * interpolation);
+                currentColor = blend(currentColor, idleColor, finalBlend);
+                currentBrightness = LightUtils::lerp(currentBrightness, idleBrightness, interpolation);
             }
-            
-            ledColor = CHSV(hue, sat, val);
-            ledStrip.show(ledColor, masterBrightness * colorBrightness);
-            
+
+            ledStrip.show(currentColor, masterBrightness * currentBrightness);
+
+
+
+#ifdef DEBUG_MODE
+            textLength = sprintf(textBuffer, "%0.02f", powerFloor);         
+#endif
+
             break;
         }
 
@@ -287,9 +339,7 @@ void updateLights()
         {
             uint8_t hue = (uint8_t) round(255 * updateCounter);
             uint8_t sat = (uint8_t) round(255 * parameter);
-            
-            ledColor = CHSV(hue, sat, 255);
-            ledStrip.show(ledColor, masterBrightness);
+            ledStrip.show(CHSV(hue, sat, 255), masterBrightness);
             
             break;
         }
@@ -297,8 +347,14 @@ void updateLights()
         case LightMode::Hue:
         {
             uint8_t hue = (uint8_t) round(255 * parameter);
-            ledColor = CHSV(hue, 255, 255);
-            ledStrip.show(ledColor, masterBrightness);
+            ledStrip.show(CHSV(hue, 255, 255), masterBrightness);
+            
+            break;
+        }
+
+        case LightMode::Psycho:
+        {
+            ledStrip.show(colorCycler.randomColor(), masterBrightness);
             
             break;
         }
@@ -315,7 +371,7 @@ void updateInputs(float delta)
     sliderTwo.update();
     if(modeButton.rose())
     {
-        LightMode newMode = (LightMode)((lightMode + 1) % 3);
+        LightMode newMode = (LightMode)((lightMode + 1) % 4);
         setMode(newMode);
     }
 

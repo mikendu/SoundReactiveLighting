@@ -58,10 +58,20 @@ void AnalogLED::show(const CRGB& color)
     uint8_t adjustedR = scale8(color.red, adjustment.red);
     uint8_t adjustedG = scale8(color.green, adjustment.green);
     uint8_t adjustedB = scale8(color.blue, adjustment.blue);
-
+    
     analogWrite(pin_r, this->dither(adjustedR));
     analogWrite(pin_g, this->dither(adjustedG));
     analogWrite(pin_b, this->dither(adjustedB));
+
+
+    /*
+    uint8_t scale = (uint8_t) round(255 * this->brightness);
+    adjustedR = scale8(adjustedR, scale);
+    adjustedG = scale8(adjustedG, scale);
+    adjustedB = scale8(adjustedB, scale);
+    analogWrite(pin_r, adjustedR);
+    analogWrite(pin_g, adjustedG);
+    analogWrite(pin_b, adjustedB);*/
 }
 
 
@@ -95,6 +105,6 @@ CHSV AnalogLED::flicker(CHSV input, float flickerFrequency)
         flickerValue = !flickerValue;
     }
 
-    return flickerValue ? input : CHSV(0, 0, 0);
+    return flickerValue ? input : CHSV(input.hue, input.sat, 0);
     
 }

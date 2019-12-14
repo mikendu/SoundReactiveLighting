@@ -47,6 +47,29 @@ public:
 
         return result;
     }
+
+    static float indexWeightedSum(float* data, uint16_t len, uint16_t start = 0)
+    {
+        float result = 0.0f;
+        for(uint16_t i = start; i < len; i++)
+            result += (data[i] * ((3 * i) + 1));
+
+        return result;
+    }
+
+    static float rollingAverage(float current, float newValue, float alpha)
+    {
+        return (current * (1.0f - alpha)) + (newValue * alpha);
+    }    
+
+    static CHSV blend(CHSV colorOne, CHSV colorTwo, float blendAmt)
+    {
+        uint8_t hue = (uint8_t)round(lerp(colorOne.hue, colorTwo.hue, blendAmt));
+        uint8_t sat = (uint8_t)round(lerp(colorOne.sat, colorTwo.sat, blendAmt));
+        uint8_t val = (uint8_t)round(lerp(colorOne.val, colorTwo.val, blendAmt));
+
+        return CHSV(hue, sat, val);
+    }
 };
 
 #endif

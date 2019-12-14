@@ -4,7 +4,7 @@
 #include "MillisecondTimer.h"
 #include "LightUtils.h"
 
-#define HOLD_THRESHOLD 0.01f
+#define HOLD_THRESHOLD 0.05f
 
 class DecayTimer
 {
@@ -22,7 +22,7 @@ public:
 
     void update(float input)
     {
-        if(input >= currentValue)
+        if(input > currentValue)
         {
             startValue = input;
             counter = 0.0f;
