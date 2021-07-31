@@ -9,13 +9,13 @@ class ColorCycler
 
 public:
 
-    ColorCycler() {}
+    ColorCycler(MillisecondTimer& baseTimer): timer(baseTimer) {}
 
     CHSV randomColor() 
     {
         
         float h, s, v;
-        cycleCounter += (MillisecondTimer::elapsedSeconds() * 10.0f);
+        cycleCounter += (this->timer.elapsedSeconds() * 10.0f);
         h = (0.5f * sin(cycleCounter)) + 0.5f;
         s = (0.5f * cos(cycleCounter * 6.3f)) + 0.5f;
         v = (0.5f * sin(cycleCounter * 7.6f)) + 0.5f;
@@ -34,6 +34,7 @@ public:
 private:
 
     float cycleCounter;
+    MillisecondTimer& timer;
 
 };
 

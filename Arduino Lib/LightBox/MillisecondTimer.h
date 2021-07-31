@@ -8,18 +8,19 @@ class MillisecondTimer
 
 public:
 
-    static void update();
-    static float elapsed();
-    static float elapsedSeconds();
-    static unsigned long timestamp();
+    MillisecondTimer();
+    void update();
+    float elapsed();
+    float elapsedSeconds();
+    unsigned long timestamp();
 
 private:
 
-    static unsigned long time;
-    static unsigned long previous;
+    unsigned long time;
+    unsigned long previous;
     
-    static float elapsedTime;
-    static bool validTime;
+    float millisecondsElapsed;
+    float secondsElapsed;
 
 };
 

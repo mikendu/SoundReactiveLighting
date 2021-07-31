@@ -10,7 +10,9 @@ class DecayTimer
 {
 
 public:
-    DecayTimer(float decay, float pow = 1.0f):  decayTimeMS(decay),
+    DecayTimer(MillisecondTimer& baseTimer, float decay, float pow = 1.0f):  
+                                                timer(baseTimer),
+                                                decayTimeMS(decay),
                                                 power(pow),
                                                 counter(0.0f),
                                                 currentValue(0.0f),
@@ -27,11 +29,15 @@ public:
             startValue = input;
             counter = 0.0f;
         }
+        
+        if(counter <= decayTimeMS) 
+        {
 
-        counter += MillisecondTimer::elapsed();
-        float linearVal = counter / decayTimeMS;
-        currentValue = LightUtils::lerp(startValue, 0.0f, linearVal);
-        //currentValue = pow(currentValue, power);
+            counter += timer.elapsed();
+            float linearVal = counter / decayTimeMS;
+            currentValue = LightUtils::lerp(startValue, 0.0f, linearVal);
+            //currentValue = pow(currentValue, power);
+        }
     }
 
     float value()
@@ -45,19 +51,22 @@ private:
     float decayTimeMS;
     float power;
     float startValue;
+    MillisecondTimer& timer;
 };
 
 class HoldTimer
 {
 
 public:
-    HoldTimer(float value, float holdTime, float decayTime) :   holdValue(value),
+    HoldTimer(MillisecondTimer& baseTimer, float value, float holdTime, float decayTime) :   
+                                                                timer(baseTimer),
+                                                                holdValue(value),
                                                                 holdTimeMS(holdTime),
                                                                 decayTimeMS(decayTime),
                                                                 counter(0.0f),
                                                                 currentValue(0.0f)
     {
-
+        totalDuration = holdTime + decayTime;
     }
 
     void update(float input)
@@ -68,12 +77,15 @@ public:
             currentValue = 0.0f;
         }
 
-        counter += MillisecondTimer::elapsed();
-        
-        if(counter >= holdTimeMS)
+        if(counter <= totalDuration)
         {
-            float linearVal = (counter - holdTimeMS) / decayTimeMS;
-            currentValue = LightUtils::lerp(0, 1, linearVal);
+            counter += timer.elapsed();
+            
+            if(counter >= holdTimeMS)
+            {
+                float linearVal = (counter - holdTimeMS) / decayTimeMS;
+                currentValue = LightUtils::lerp(0, 1, linearVal);
+            }
         }
     }
 
@@ -89,6 +101,8 @@ private:
     float holdTimeMS;
     float decayTimeMS;
     float counter;
+    float totalDuration;
+    MillisecondTimer& timer;
 
 
 };
@@ -98,7 +112,7 @@ class SinusoidTimer
 
 public:
 
-    SinusoidTimer(float period): period(period)
+    SinusoidTimer(MillisecondTimer& baseTimer, float period): timer(baseTimer), period(period)
     {
 
     }
@@ -106,7 +120,7 @@ public:
     float update(float multiplier = 1.0f)
     {
         float twoPI = 2 * M_PI;
-        counter += ((twoPI * MillisecondTimer::elapsed() / period) * multiplier);
+        counter += ((twoPI * timer.elapsed() / period) * multiplier);
         if (counter > period)
             counter -= period;
 
@@ -128,6 +142,7 @@ private:
     float period;
     float counter;
     float currentValue;
+    MillisecondTimer& timer;
 
 };
 

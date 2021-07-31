@@ -1,14 +1,14 @@
 #include "MillisecondTimer.h"
 
-unsigned long MillisecondTimer::time = 0;
-unsigned long MillisecondTimer::previous = 0;
+MillisecondTimer::MillisecondTimer():   time(0), 
+                                        previous(0), 
+                                        millisecondsElapsed(0.0f), 
+                                        secondsElapsed(0.0f) {
 
-float MillisecondTimer::elapsedTime = 0.0f;
-bool MillisecondTimer::validTime = false;
+}
 
 void MillisecondTimer::update()
 {
-    validTime = false;
     previous = time;
     time = micros();
 
@@ -18,21 +18,20 @@ void MillisecondTimer::update()
         previous = time;
         return;
     }
+    
+    float elapsedMicro = time - previous;
+    millisecondsElapsed = elapsedMicro / 1000.0f;
+    secondsElapsed = millisecondsElapsed / 1000.0f;
 }
 
 float MillisecondTimer::elapsed()
 {
-    if(validTime)
-        return elapsedTime;
-
-    float elapsedMicro = time - previous;
-    elapsedTime = elapsedMicro / 1000.0f;
-    return elapsedTime;
+    return millisecondsElapsed;
 }
 
 float MillisecondTimer::elapsedSeconds()
 {
-    return elapsed() / 1000.0f;
+    return secondsElapsed;
 }
 
 unsigned long MillisecondTimer::timestamp()

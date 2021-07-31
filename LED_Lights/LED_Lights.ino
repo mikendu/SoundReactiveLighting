@@ -1,4 +1,6 @@
 #define DEFAULT_UPDATE_SPEED 0.0001f
+#define POTENTIOMETER_THRESHOLD 15
+#define POTENTIOMETER_DELAY_SECONDS 1.0f
 //#define DEBUG_MODE
 
 #include <TeensyThreads.h>
@@ -46,9 +48,12 @@ AudioConnection          patchCord8(mixer, peakMiddle);
 ///////////////////////////////////
 // Display & Control
 ///////////////////////////////////
+MillisecondTimer mainThreadTimer = MillisecondTimer();
+MillisecondTimer displayThreadTimer = MillisecondTimer();
+
 Bounce modeButton = Bounce(17, 15);
-Potentiometer sliderOne = Potentiometer(A1);
-Potentiometer sliderTwo = Potentiometer(A2);
+Potentiometer sliderOne = Potentiometer(A2, POTENTIOMETER_THRESHOLD);
+Potentiometer sliderTwo = Potentiometer(A1, POTENTIOMETER_THRESHOLD);
 Potentiometer* activeSlider = nullptr;
 
 CustomDisplay screen = CustomDisplay();
@@ -71,25 +76,25 @@ bool coloredSlider = false;
 // LED Lighting
 ///////////////////////////////////
 
-AnalogLED ledStrip = AnalogLED(2, 1, 0);
+AnalogLED ledStrip = AnalogLED(mainThreadTimer, 2, 1, 0);
 LightMode lightMode = LightMode::Dynamic;
 
 float updateSpeed = DEFAULT_UPDATE_SPEED;
 float updateCounter = 0.0f;
 
-ColorCycler colorCycler = ColorCycler();
-BeatAnalyzer beatAnalyzer = BeatAnalyzer();
-KickTimer kickEffectTimer = KickTimer(10, 10, 180);
+ColorCycler colorCycler = ColorCycler(mainThreadTimer);
+BeatAnalyzer beatAnalyzer = BeatAnalyzer(mainThreadTimer);
+KickTimer kickEffectTimer = KickTimer(mainThreadTimer, 10, 10, 180);
 float highAverage = 0.0f;
 float bassAverage = 0.0f;
 float powerAverage = 0.0f;
 
-HoldTimer releaseTimer = HoldTimer(0.0f, 200, 1000);
-DecayTimer saturationTimer = DecayTimer(400);
+HoldTimer releaseTimer = HoldTimer(mainThreadTimer, 0.0f, 200, 1000);
+DecayTimer saturationTimer = DecayTimer(mainThreadTimer, 400);
 
-SinusoidTimer hueCycle = SinusoidTimer(14456);
-SinusoidTimer saturationCycle = SinusoidTimer(17856);
-SinusoidTimer brightnessCycle = SinusoidTimer(30356);
+SinusoidTimer hueCycle = SinusoidTimer(mainThreadTimer, 14456);
+SinusoidTimer saturationCycle = SinusoidTimer(mainThreadTimer, 17856);
+SinusoidTimer brightnessCycle = SinusoidTimer(mainThreadTimer, 30356);
 
 
 void setup() 
@@ -133,8 +138,8 @@ void loop()
 {
     /// --- TIMING --- ///
     
-    MillisecondTimer::update();
-    float delta = MillisecondTimer::elapsed();
+    mainThreadTimer.update();
+    float delta = mainThreadTimer.elapsed();
     updateCounter = LightUtils::wrap(updateCounter + (updateSpeed * delta), 1.0f);
     
     /// --- CONTROL LOGIC --- ///
@@ -151,6 +156,7 @@ void displayThread()
     
     while(true)
     {
+        displayThreadTimer.update();
         if(adjustmentMode && activeSlider != nullptr)
             screen.drawSlider(activeSlider->value(), coloredSlider);
         else
@@ -164,8 +170,7 @@ void displayThread()
         threads.delay(18);
 
         // Updates
-        float delta = MillisecondTimer::elapsed();
-        updateInputs(delta);
+        updateInputs();
     }
 }
 
@@ -221,7 +226,7 @@ void updateAudio()
 float rollingPower = 0.0f;
 
 void updateLights()
-{
+{            
     float masterBrightness = sliderOne.scaledValue();
     float parameter = sliderTwo.value();
     switch(lightMode)
@@ -245,7 +250,7 @@ void updateLights()
             // -- IDLE STATE -- //
 
             powerAverage = LightUtils::rollingAverage(powerAverage, power, 0.00009f);
-            float multiplier = 0.43f + (1.3f * powerAverage);
+            float multiplier = 0.43f + (1.3f * powerAverage  );
             //powerAverage = min(powerAverage, power);
             
             
@@ -364,8 +369,10 @@ void updateLights()
     }
 }
 
-void updateInputs(float delta)
+
+void updateInputs()
 {
+    float delta = displayThreadTimer.elapsedSeconds();
     modeButton.update();
     sliderOne.update();
     sliderTwo.update();
@@ -374,11 +381,12 @@ void updateInputs(float delta)
         LightMode newMode = (LightMode)((lightMode + 1) % 4);
         setMode(newMode);
     }
-
+    
     if(adjustmentMode)
-    {
+    {        
+        
         adjustmentTimer += delta;
-        if(adjustmentTimer > 0.05f)
+        if(adjustmentTimer >= POTENTIOMETER_DELAY_SECONDS)
         {
             adjustmentTimer = 0.0f;
             adjustmentMode = false;
@@ -399,7 +407,7 @@ void updateInputs(float delta)
         adjustmentTimer = 0.0f;
         adjustmentMode = true;
         activeSlider = &sliderOne;
-        coloredSlider = true;
+        coloredSlider = false;
     }
 
     if(sliderTwo.available())
@@ -413,6 +421,6 @@ void updateInputs(float delta)
         adjustmentTimer = 0.0f;
         adjustmentMode = true;
         activeSlider = &sliderTwo;
-        coloredSlider = false;
+        coloredSlider = true;
     }
 }

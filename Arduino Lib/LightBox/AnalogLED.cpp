@@ -1,12 +1,14 @@
 #include "AnalogLED.h"
 
-AnalogLED::AnalogLED( 	int redPin, 
+AnalogLED::AnalogLED( 	MillisecondTimer& timerRef,
+                        int redPin, 
                         int greenPin, 
                         int bluePin, 
                         const float ditherTime  = 5.0f,
                         const CRGB& correction  = TypicalSMD5050, 
                         const CRGB& temperature = Halogen, 
-                        const CRGB& balance = Tungsten100W)  :		    pin_r(redPin),
+                        const CRGB& balance = Tungsten100W)  :		    timer(timerRef),
+                                                                        pin_r(redPin),
                                                                         pin_g(greenPin),
                                                                         pin_b(bluePin),
                                                                         ditherWindow(ditherTime),
@@ -14,7 +16,7 @@ AnalogLED::AnalogLED( 	int redPin,
                                                                         flickerCounter(0.0f),
                                                                         flickerValue(true)
 {
-    this->brightness = 255;
+    this->brightness = 1.0f;
     this->colorCorrection = CRGB(correction);
     this->colorTemperature = CRGB(temperature);
     this->whiteBalance = CRGB(balance);
@@ -43,6 +45,7 @@ void AnalogLED::show(const CRGB& color, const float brightness)
     this->show(color);
 }
 
+byte test = 0;
 void AnalogLED::setBrightness(const float brightness)
 {
     this->brightness = brightness;
@@ -59,9 +62,9 @@ void AnalogLED::show(const CRGB& color)
     uint8_t adjustedG = scale8(color.green, adjustment.green);
     uint8_t adjustedB = scale8(color.blue, adjustment.blue);
     
-    analogWrite(pin_r, this->dither(adjustedR));
-    analogWrite(pin_g, this->dither(adjustedG));
-    analogWrite(pin_b, this->dither(adjustedB));
+    analogWrite(pin_r, this->dither(adjustedR, true));
+    analogWrite(pin_g, this->dither(adjustedG, false));
+    analogWrite(pin_b, this->dither(adjustedB, false));
 
 
     /*
@@ -78,14 +81,27 @@ void AnalogLED::show(const CRGB& color)
 
 void AnalogLED::stepDithering()
 {
-    this->ditherCounter += MillisecondTimer::elapsed();
+    this->ditherCounter += this->timer.elapsed();
     if(this->ditherCounter > this->ditherWindow)
         this->ditherCounter = 0.0f;
 }
     
-uint8_t AnalogLED::dither(uint8_t color)
+uint8_t AnalogLED::dither(uint8_t color, bool print)
 {
     float scaled = color * this->brightness;
+
+    test += 1;
+    if (test >= 255 && print) {
+        test = 0;
+        Serial.print("Brightness: ");
+        Serial.print(this->brightness, 3);
+        Serial.print(", unscaled: ");
+        Serial.print(color);
+        Serial.print(", scaled: ");
+        Serial.print(scaled);
+        Serial.println("");
+    }
+
     uint8_t top = (uint8_t)ceil(scaled);
     uint8_t bottom = (uint8_t)floor(scaled);
     
@@ -96,7 +112,7 @@ uint8_t AnalogLED::dither(uint8_t color)
 
 CHSV AnalogLED::flicker(CHSV input, float flickerFrequency)
 {
-    this->flickerCounter += MillisecondTimer::elapsed();
+    this->flickerCounter += this->timer.elapsed();
     float period = (1.0f / flickerFrequency) * 1000.0f;
     
     if (flickerCounter >= period)

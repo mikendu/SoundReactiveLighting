@@ -4,9 +4,10 @@
 class Potentiometer
 {
 public:
-    Potentiometer(byte pin)
+    Potentiometer(byte pin, byte activityThreshold)
     {
         this->pin = pin;
+        this->threshold = activityThreshold;
     }
 
     void update()
@@ -23,7 +24,7 @@ public:
     {
         uint16_t newAverage = (values[0] + values[1]) / 2;
         uint16_t oldAverage = (values[2] + values[3] + values[4]) / 3;
-        return abs(newAverage - oldAverage) >= 5;
+        return abs(newAverage - oldAverage) >= threshold;
     }
 
     uint16_t rawAverage() 
@@ -47,6 +48,7 @@ public:
 
 private:
     uint8_t pin = 0;
+    uint8_t threshold = 5;
     uint16_t values[5] = { 0, 0, 0, 0, 0 };
 
 };

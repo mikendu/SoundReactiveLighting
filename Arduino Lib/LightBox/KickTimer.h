@@ -1,26 +1,25 @@
 #ifndef KICK_TIMER_H
 #define KICK_TIMER_H
 
-#include "MillisecondTimer.h"
 #include "LightUtils.h"
+#include "MillisecondTimer.h"
 
 
 class KickTimer
 {
 
 public:
-    KickTimer(float dip, float flash, float fade)
+    KickTimer(MillisecondTimer& baseTimer, float dip, float flash, float fade): milliTimer(baseTimer),
+                                                                                timer(0),
+                                                                                power(0),
+                                                                                dipDuration(dip),
+                                                                                flashDuration(flash),
+                                                                                fadeDuration(fade),
+                                                                                totalDuration(dip + flash + fade),
+                                                                                colorSat(1.0f),
+                                                                                colorVal(1.0f)
+
     {
-        timer = 0;
-        power = 0;
-
-        dipDuration = dip;
-        flashDuration = flash;
-        fadeDuration = fade;
-        totalDuration = dipDuration + flashDuration + fadeDuration;
-
-        colorSat = 1.0f;
-        colorVal = 1.0f;
     }
 
 
@@ -61,7 +60,8 @@ public:
                 colorVal = 1.0f;
             }
 
-            timer += MillisecondTimer::elapsed();
+            timer += this->milliTimer.elapsed();
+            //timer += 0.0001f;
         }
     }
 
@@ -85,6 +85,7 @@ private:
     float totalDuration;
     float colorSat;
     float colorVal;
+    MillisecondTimer& milliTimer;
 };
 
 

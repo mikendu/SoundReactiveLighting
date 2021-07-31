@@ -11,7 +11,7 @@ class BeatAnalyzer
 
 public:
 
-    BeatAnalyzer() : powerBuffer(255)
+    BeatAnalyzer(MillisecondTimer& timerRef) : powerBuffer(255), timer(timerRef)
     {
     }
 
@@ -38,12 +38,12 @@ public:
         kick = 0.0f;
 
         if( (hi - 0.01f) > (1.4f * kickHi) && (hi - kickHi) > 0.03f && hi > 0.02f)
-            impactHi = MillisecondTimer::timestamp();
+            impactHi = this->timer.timestamp();
         
         
         if((lo - kickLo) > 0.0987f && lo > 0.165f && (lo - 0.05f) > (1.5f * kickLo))
         {
-            unsigned long currentTime = MillisecondTimer::timestamp();
+            unsigned long currentTime = this->timer.timestamp();
             if(currentTime >= impactHi && (currentTime - impactHi) <= 50000)
             {
                 kick = LightUtils::clamp(pow(lo, 1.25f) * 1.75f, 0.0f, 1.0f);
@@ -111,6 +111,7 @@ private:
     unsigned long impactHi;
     
     RingBuffer<float> powerBuffer;
+    MillisecondTimer& timer;
 
 };
 

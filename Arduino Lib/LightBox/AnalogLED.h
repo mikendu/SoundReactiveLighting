@@ -15,6 +15,7 @@ class AnalogLED
 
 private: 
 
+    MillisecondTimer& timer;
     const int pin_r;
     const int pin_g;
     const int pin_b;
@@ -32,11 +33,12 @@ private:
     bool flickerValue;
 
     void stepDithering();
-    uint8_t dither(uint8_t color);
+    uint8_t dither(uint8_t color, bool print);
 
 public:
 
-    AnalogLED( 	int redPin, 
+    AnalogLED( 	MillisecondTimer& timer,
+                int redPin, 
                 int greenPin, 
                 int bluePin, 
                 const float ditherTimer = 5.0f,
