@@ -142,8 +142,10 @@ public:
 
             uint8_t scaledBrightness = scale8(scale8(currentVal, value), brightness);
             uint16_t index = i  % strip.length();
-            strip[index] += CHSV(properties.hue, currentSat, scaledBrightness);
-            strip[index] += parameters.getScaledColor(GlobalColorType::PSYCHO, scaledBrightness);
+            CRGB mainColor = CHSV(properties.hue, currentSat, scaledBrightness);
+            CRGB secondaryColor = parameters.getScaledColor(GlobalColorType::PSYCHO, scaledBrightness);
+            strip[index] += mainColor;
+            strip[index] += secondaryColor;
         }
     }
 

@@ -24,11 +24,11 @@ public:
 
     void updateSoundParameters(SpectrumAnalyzer& spectrum)
     {
-        float energy = pow(spectrum.getEnergy(SoundBand::BRIGHTNESS), 1.25f);
-        uint16_t crazyEnergy = round(300 * energy);
+        float energy = spectrum.getEnergy(SoundBand::BRIGHTNESS) * spectrum.getEnergy(SoundBand::KICK);
+        uint16_t crazyEnergy = round(1024.0f * energy);
 
         crazyScale = min(crazyEnergy, 255);
-        oscillatorSpeed = lerp(5.0f, 10.0f, energy);
+        oscillatorSpeed = lerp(4.0f, 25.0f, energy);
     }
 
     void update(float deltaTime)
@@ -37,7 +37,7 @@ public:
         crazyOscillator->update(deltaTime);
 
         crazyColor = crazyOscillator->color();
-        scaleColor(crazyColor, crazyScale);
+        crazyColor = scaleColor(crazyColor, crazyScale);
     }
 
     CRGB getScaledColor(GlobalColorType colorType, uint8_t scale)
@@ -53,8 +53,7 @@ public:
                 break;
         }
 
-        scaleColor(color, scale);
-        return color;
+        return scaleColor(color, scale);
     }
 
 private:

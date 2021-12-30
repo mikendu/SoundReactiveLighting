@@ -102,11 +102,20 @@ static inline float random(float min, float max)
     return ((randomFloat() * range) + min);
 }
 
-static inline void scaleColor(CRGB& color, const uint8_t scale)
+static inline CRGB scaleColor(CRGB color, const uint8_t scale)
 {
     color.r = scale8(color.r, scale);
     color.g = scale8(color.g, scale);
     color.b = scale8(color.b, scale);
+    return color;
+}
+
+static inline CRGB multiplyColors(CRGB color1, CRGB color2)
+{
+    color1.r = scale8(color1.r, color2.r);
+    color1.g = scale8(color1.g, color2.g);
+    color1.b = scale8(color1.b, color2.b);
+    return color1;
 }
 
 #endif
