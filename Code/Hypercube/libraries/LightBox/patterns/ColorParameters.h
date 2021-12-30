@@ -24,15 +24,16 @@ public:
 
     void updateSoundParameters(SpectrumAnalyzer& spectrum)
     {
-        // todo scale with square of brightness energy
-        // todo scale beyond 255
-        // todo scale oscillator speed by brightness energy
-        crazyScale = round(255 * spectrum.getEnergy(SoundBand::BRIGHTNESS));
+        float energy = pow(spectrum.getEnergy(SoundBand::BRIGHTNESS), 1.25f);
+        uint16_t crazyEnergy = round(300 * energy);
+
+        crazyScale = min(crazyEnergy, 255);
+        oscillatorSpeed = lerp(5.0f, 10.0f, energy);
     }
 
     void update(float deltaTime)
     {        
-        crazyOscillator->setSpeed(10.0f);
+        crazyOscillator->setSpeed(oscillatorSpeed);
         crazyOscillator->update(deltaTime);
 
         crazyColor = crazyOscillator->color();
@@ -61,6 +62,7 @@ private:
     HsvOscillator* crazyOscillator;
     CRGB crazyColor;
     uint8_t crazyScale;
+    float oscillatorSpeed;
 
 
 };

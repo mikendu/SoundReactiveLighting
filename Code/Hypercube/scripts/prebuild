@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -rf "C:/Users/Michael/Documents/Arduino/libraries/LightBox/*"
+find "C:/Users/Michael/Documents/Hypercube/Code/Hypercube/libraries/LightBox/" -type f -exec cp {} "C:/Users/Michael/Documents/Arduino/libraries/LightBox/" \;

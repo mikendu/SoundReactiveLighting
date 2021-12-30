@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./prebuild
+alias arduino_cli='C\:/Program\ Files\ \(x86\)/Arduino/arduino_debug'
+arduino_cli --verify --board teensy:avr:teensy40:usb=serial,speed=816,opt=o3std,keys=en-us ../Hypercube.ino
