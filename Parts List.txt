@@ -1,0 +1,101 @@
+===========================
+Experimental
+===========================
+- Mirror Film: https://www.amazon.com/Window-Daytime-Privacy-Mirror-Silver/dp/B00CWGIHBE
+- Spray Bottle: https://www.amazon.com/Tolco-Bottle-Frosted-Assorted-Colors/dp/B000H88PCU
+- Pack of Acrylic Squares: https://www.amazon.com/Acrylic-Plastic-Gartful-Plexiglass-Projects/dp/B07ZVNQC8P
+- RGB LED Controller: https://www.amazon.com/ALITOVE-Controller-Wireless-SK6812-RGBW-Addressable/dp/B07DDB6JHJ
+- Touch Potentiometer: https://www.sparkfun.com/products/13144
+
+
+
+
+
+
+
+
+
+
+===========================
+Final Build
+===========================
+- NeoPixel Skinny 144/m (2m): https://www.adafruit.com/product/2969
+- NeoPixel Skinny 60/m (2m): https://www.adafruit.com/product/2959?length=1
+- T Square: https://www.amazon.com/gp/product/B07XTSCFKB?th=1
+- Acrylic Mirror Panel: https://www.amazon.com/gp/product/B07XTSCFKB?th=1
+
+
+- 16 AWG Stranded Core Wire: https://www.amazon.com/Fermerry-Silicone-Stranded-Flexible-Electrical/dp/B089CW1YGM/
+- Capacitor Kit: https://www.amazon.com/OCR-Electrolytic-Capacitor-Assortment-0-1uF%EF%BC%8D1000uF/dp/B01MSQOX0Q
+
+- 75W Power Supply: https://www.amazon.com/JOVNO-Converter-100-240V-Transformer-5-5x2-5mm/dp/B08764XJ2M
+- 25W Power Supply: https://www.amazon.com/JOVNO-100-240V-Converter-Transformer-5-5x2-5mm/dp/B08768PZGB/
+
+- Teensy 4.0: https://www.pjrc.com/store/teensy40.html
+- Teensy Audio Shield:
+- Teensy 14x1 Pins (x2): https://www.pjrc.com/store/header_14x1_d.html
+- Teensy 14x1 Socket (x2): https://www.pjrc.com/store/socket_14x1.html
+- Teensy 14x1 Header (x2): https://www.pjrc.com/store/header_14x1.html
+- Solderable Breadboard: https://www.amazon.com/Gikfun-Solder-able-Breadboard-Plated-Arduino/dp/B071R3BFNL
+- Breadboard 2: https://www.amazon.com/dp/B07ZYNWJ1S
+- Perfboard: https://www.amazon.com/AiTrip-Perfboard-Breadboard-Prototyping-Electronic/dp/B07XYL451Y
+- Ratcheting Wire Crimper: https://www.amazon.com/Hautton-Crimping-Terminal-Ratcheting-Connectors/dp/B083DRCFRY
+
+
+- LED Touch Button 1: https://www.amazon.com/Heltec-Automation-Capacitance-Capacitive-ColorfulLight/dp/B077SWJ17P
+- LED Touch Button 2: https://www.amazon.com/Heltec-Automation-Capacitance-Capacitive-Siwitch/dp/B0756CF972
+
+
+
+
+
+===========================
+TODO
+===========================
+- Latching system???
+- Circuit Board mounts/spacers??
+
+
+
+
+
+===========================
+Dimensions
+===========================
+
+
+
+
+
+
+===========================
+Notes
+===========================
+- Mount Teensy on top of audio shield, see: https://www.pjrc.com/store/teensy3_audio.html, https://www.pjrc.com/store/teensy3_audio_quadch.jpg
+- Use FlexPWM Pins for digital out: https://www.pjrc.com/teensy/td_pulse.html
+- iMaterialize for printing: https://i.materialise.com/en/learn/supported-3d-file-formats
+
+
+- 264 LEDs, 22 per side (roughly 1.8m), side = 15.277777777777778 cm
+- Panel size = 6 inches = 15.24 cm
+
+
+
+
+Plan B: 
+252 LEDS, 21 per side, 14.5833333333cm per side, 1.75m total
+
+Cube Side Length = 16.5cm
+
+New Plan = 21 Per side  
+
+
+
+
+
+
+
+
+20
+21
+20

@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "mathutils": "c",
+        "cstddef": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "xutility": "cpp",
+        "type_traits": "cpp",
+        "xtr1common": "cpp",
+        "cstdlib": "cpp",
+        "map": "cpp",
+        "compare": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "xmemory": "cpp",
+        "atomic": "cpp"
+    }
+}

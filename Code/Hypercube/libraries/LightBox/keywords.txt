@@ -1,0 +1,61 @@
+#######################################
+# Syntax Coloring Map For FastLED
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+LEDManager                      KEYWORD1
+NeopixelStrip                   KEYWORD1
+BrightnessController            KEYWORD1
+
+
+
+MillisecondTimer	KEYWORD1
+LightMode	KEYWORD1
+Potentiometer	KEYWORD1
+LightBox	KEYWORD1
+CustomDisplay	KEYWORD1
+Bundle	KEYWORD1
+Pair	KEYWORD1
+LightUtils  KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+showAll                     KEYWORD2
+setup                       KEYWORD2
+getLeds                     KEYWORD2
+length                      KEYWORD2
+
+
+
+
+# FastLED methods
+# AnalogLED::addLeds	KEYWORD2
+
+# Colors
+show	KEYWORD2
+update	KEYWORD2
+elapsed	KEYWORD2
+value	KEYWORD2
+scaledValue	KEYWORD2
+initialize	KEYWORD2
+clear	KEYWORD2
+scaledValue	KEYWORD2
+value1	KEYWORD2
+value2	KEYWORD2
+value3	KEYWORD2
+
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+Fade	LITERAL1
+Dynamic	LITERAL1
+Hue 	LITERAL1
