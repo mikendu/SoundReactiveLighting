@@ -1,7 +1,7 @@
 #ifndef PARTICLE_BUFFER_H
 #define PARTICLE_BUFFER_H
 
-#define MAX_PARTICLES 8
+#define MAX_PARTICLES 32
 
 #include "LightParticle.h"
 #include "NeopixelStrip.h"
@@ -36,7 +36,7 @@ public:
     void update(float elapsedSeconds, uint16_t stripLength) 
     {
         for (ParticleEmitter* emitter : emitters)
-            emitter->update(this, elapsedSeconds);
+            emitter->update(this, elapsedSeconds, stripLength);
 
         BufferNode<LightParticle>* currentNode = liveParticles.first();
         while (currentNode != nullptr) 

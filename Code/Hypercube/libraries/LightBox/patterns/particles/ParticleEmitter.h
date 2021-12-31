@@ -11,20 +11,29 @@ class ParticleEmitter
 {
 
 public:
+    
 
-    ParticleEmitter(float particlesPerSecond)
+    ParticleEmitter(float particlesPerSecond) : ParticleEmitter(particlesPerSecond, 0.0f)
     {
-        emissionInterval = 1.0f / particlesPerSecond;
-        emissionCounter = emissionInterval;
     }
 
-    virtual void updateSoundParameters(SpectrumAnalyzer& spectrum, DerivedParameters& parameters) = 0;
 
-    virtual void update(ParticleSystem* particleSystem, float deltaTime)
+    ParticleEmitter(float particlesPerSecond, float timeOffset)
+    {
+        emissionInterval = 1.0f / particlesPerSecond;
+        emissionCounter = emissionInterval + timeOffset;
+        baseInterval = emissionInterval;
+    }
+
+    virtual void updateSoundParameters(SpectrumAnalyzer& spectrum, DerivedParameters& parameters)
+    {
+    }
+
+    virtual void update(ParticleSystem* particleSystem, float deltaTime, uint16_t stripLength)
     {          
         if (emissionCounter <= 0.0f)
         {
-            if (spawnParticle(particleSystem))
+            if (spawnParticle(particleSystem, stripLength))
                 emissionCounter = emissionInterval;
         }
         else
@@ -35,8 +44,9 @@ public:
 
 
 protected:
-    virtual bool spawnParticle(ParticleSystem* particleSystem) = 0;
+    virtual bool spawnParticle(ParticleSystem* particleSystem, uint16_t stripLength) = 0;
 
+    float baseInterval;
     float emissionInterval;
     float emissionCounter;
 

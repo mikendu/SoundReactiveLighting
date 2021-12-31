@@ -17,9 +17,15 @@ public:
 
     void compute(SpectrumAnalyzer& spectrum)
     {
-        particleSpeed = 1.0f + (16.0f * pow(spectrum.getEnergy(SoundBand::KICK), 2.0f));
-        particleIntensity = 1.0f + spectrum.getIntensity();
-        oscillatorSpeed = 1.0f + (2.0f * spectrum.getIntensity());
+        #ifdef SOUND_REACTIVE
+            particleSpeed = 1.0f + (16.0f * pow(spectrum.getEnergy(SoundBand::KICK), 2.0f));
+            particleIntensity = 1.0f + spectrum.getIntensity();
+            oscillatorSpeed = 1.0f + (2.0f * spectrum.getIntensity());
+        #else
+            particleSpeed = 1.0f;
+            particleIntensity = 1.0f;
+            oscillatorSpeed = 1.0f;
+        #endif
     }
 
     float getParameter(DerivedParameterType type)

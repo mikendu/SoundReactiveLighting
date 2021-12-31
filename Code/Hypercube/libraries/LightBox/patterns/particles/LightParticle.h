@@ -44,7 +44,7 @@ struct ParticleProperties
     float size = 5.0f;
     float velocity = 5.0f;
     float hardness = 1.0f;
-    // controls "ramp up/down" of brightness. 0 = no ramp, curve up and down
+    // controls "ramp up/down" of brightness. 0 = no ramp, 1 = full curve up and down
     float brightnessProfile = 0.5f; 
 };
 
@@ -78,12 +78,15 @@ public:
         if (!isAlive())
             return;
         
-        uint8_t satIncrease = satRange * spectrum.getIntensity();
-        uint8_t valIncrease = valRange * spectrum.getIntensity();
-        currentSat = qadd8(properties.saturation, satIncrease);
-        currentVal = qadd8(properties.value, valIncrease);
-        // currentSat = properties.saturation;
-        // currentVal = properties.value;
+        #ifdef SOUND_REACTIVE
+            uint8_t satIncrease = satRange * spectrum.getIntensity();
+            uint8_t valIncrease = valRange * spectrum.getIntensity();
+            currentSat = qadd8(properties.saturation, satIncrease);
+            currentVal = qadd8(properties.value, valIncrease);
+        #else
+            currentSat = properties.saturation;
+            currentVal = properties.value;
+        #endif
         
         float intensity = parameters.getParameter(DerivedParameterType::PARTICLE_INTENSITY);
         radius = baseRadius * intensity;

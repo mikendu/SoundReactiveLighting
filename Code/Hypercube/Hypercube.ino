@@ -45,7 +45,7 @@ SpectrumAnalyzer        spectrumAnalyzer(fourierAnalyzer, peakMiddle);
 // Visuals
 ///////////////////////////////////
 
-PatternManager          patternManager(spectrumAnalyzer, ledStrip);
+VisualsManager          visualsManager(spectrumAnalyzer, ledStrip);
 
 
 
@@ -94,7 +94,7 @@ void loop()
 
         // process sound & fill color array with patterns
         spectrumAnalyzer.update();        
-        patternManager.update();
+        visualsManager.update();
 
         // show colors on actual leds
         ledStrip.setBrightness(brightnessController.update());

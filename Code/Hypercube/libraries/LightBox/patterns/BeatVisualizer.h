@@ -1,45 +1,64 @@
 #ifndef BEAT_VISUALIZER_H
 #define BEAT_VISUALIZER_H
 
-// #include "LightPattern.h"
+#include "DerivedParameters.h"
+#include "SpectrumAnalyzer.h"
+#include "NeopixelStrip.h"
 
+#define NODE_INTERVAL 60.0f
+#define MIN_RADIUS 5.0f
+#define MAX_RADIUS 30.0f
+#define MAX_VALUE 32
 
-// class BeatVisualizer : public LightPattern
-// {
+class BeatVisualizer
+{
 
-// public:
+public:
 
-//     BeatVisualizer(SpectrumAnalyzer& spectrum, NeopixelStrip& ledStrip): LightPattern(spectrum, ledStrip)
-//     {
-//     }
+    void updateSoundParameters(SpectrumAnalyzer& spectrum)
+    {        
+        #ifdef SOUND_REACTIVE
+            
+            // Kick
+            if (spectrum.getOnset(SoundBand::KICK)) 
+            {
+                float energy = spectrum.getEnergy(SoundBand::KICK);
+                radius = lerp(MIN_RADIUS, MAX_RADIUS, energy);
+                value = MAX_VALUE;
+                
+                //value = round(MAX_VALUE * energy);
+                //radius = MAX_RADIUS;
+            }
+            else
+            {
+                value = 0;
+                radius = MIN_RADIUS;
+            }
 
-//     void display() 
-//     {
-//         // CRGB* leds = ledStrip.getLeds();
+        #else
+            value = 0;
+            radius = MIN_RADIUS;
+        #endif
+    }
 
-//         // // Kick
-//         // if (spectrum.getOnset(SoundBand::KICK)) 
-//         // {
-//         //     uint8_t kickBrightness = (255 * spectrum.getEnergy(SoundBand::KICK));
-//         //     for(uint8_t i = 0; i < 10; i++) 
-//         //     {
-//         //         leds[i] += CRGB(kickBrightness, 0, 0);
-//         //     }
-//         // }
+    void show(NeopixelStrip& strip) 
+    {
+        for (uint16_t i = 0; i < strip.length(); i++) 
+        {
+            float nearestNode = round(i / NODE_INTERVAL) * NODE_INTERVAL;
+            float distance = 1.0f - constrain(abs(nearestNode - i) / radius, 0.0f, 1.0f);
+            uint8_t scaledValue = round(value * distance);
+            scaledValue = ease8InOutCubic(scaledValue);
+            strip[i] += CRGB(scaledValue, scaledValue, scaledValue);
+        }
+    }
 
-//         // // Snare
-//         // if (spectrum.getOnset(SoundBand::SNARE)) 
-//         // {
-//         //     uint8_t snareBrightness = (255 * spectrum.getEnergy(SoundBand::SNARE));
-//         //     for(uint8_t i = 10; i < 20; i++) 
-//         //     {
-//         //         leds[i] += CRGB(0, snareBrightness, 0);
-//         //     }
-//         // }
-//     }
+private:
 
+    uint8_t value;
+    float radius;
 
-// };
+};
 
 
 #endif

@@ -1,12 +1,14 @@
 #ifndef LIGHT_BOX_H
 #define LIGHT_BOX_H
 
+#define SOUND_REACTIVE
+
 // Processing
 #include "NeopixelStrip.h"
 
 // Processing
 #include "SpectrumAnalyzer.h"
-#include "PatternManager.h"
+#include "VisualsManager.h"
 
 // Util
 #include "MathUtils.h"

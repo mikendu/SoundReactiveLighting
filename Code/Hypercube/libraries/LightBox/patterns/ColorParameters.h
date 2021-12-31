@@ -24,11 +24,16 @@ public:
 
     void updateSoundParameters(SpectrumAnalyzer& spectrum)
     {
-        float energy = spectrum.getEnergy(SoundBand::BRIGHTNESS) * spectrum.getEnergy(SoundBand::KICK);
-        uint16_t crazyEnergy = round(1024.0f * energy);
+        #ifdef SOUND_REACTIVE
+            float energy = spectrum.getEnergy(SoundBand::BRIGHTNESS) * spectrum.getEnergy(SoundBand::KICK);
+            uint16_t crazyEnergy = round(1024.0f * energy);
 
-        crazyScale = min(crazyEnergy, 255);
-        oscillatorSpeed = lerp(4.0f, 25.0f, energy);
+            crazyScale = min(crazyEnergy, 255);
+            oscillatorSpeed = lerp(4.0f, 25.0f, energy);
+        #else
+            crazyScale = 0.0f;
+            oscillatorSpeed = 1.0f;
+        #endif
     }
 
     void update(float deltaTime)
