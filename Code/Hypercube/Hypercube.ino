@@ -1,9 +1,10 @@
-#include <LightBox.h>
+
 
 #define INDICATOR_LIGHT_PIN 2
 #define TOUCH_SWITCH_PIN 22
 #define LED_COUNT 201 // Should be 301 with external strip, 241 with internal strip from cube. Set to 201 since some lights are broken
 
+#include <LightBox.h>
 
 ///////////////////////////////////
 // Touch Inputs & LED Strip

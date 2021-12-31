@@ -13,12 +13,17 @@ class ParticleEmitter
 public:
     
 
-    ParticleEmitter(float particlesPerSecond) : ParticleEmitter(particlesPerSecond, 0.0f)
+    ParticleEmitter(float particlesPerSecond, 
+                    float minLocation, 
+                    float maxLocation) : ParticleEmitter(particlesPerSecond, minLocation, maxLocation, 0.0f)
     {
     }
 
 
-    ParticleEmitter(float particlesPerSecond, float timeOffset)
+    ParticleEmitter(float particlesPerSecond, 
+                    float minLocation, 
+                    float maxLocation, 
+                    float timeOffset) : locationMin(minLocation), locationMax(maxLocation)
     {
         emissionInterval = 1.0f / particlesPerSecond;
         emissionCounter = emissionInterval + timeOffset;
@@ -29,11 +34,11 @@ public:
     {
     }
 
-    virtual void update(ParticleSystem* particleSystem, float deltaTime, uint16_t stripLength)
+    virtual void update(ParticleSystem* particleSystem, float deltaTime)
     {          
         if (emissionCounter <= 0.0f)
         {
-            if (spawnParticle(particleSystem, stripLength))
+            if (spawnParticle(particleSystem))
                 emissionCounter = emissionInterval;
         }
         else
@@ -44,11 +49,13 @@ public:
 
 
 protected:
-    virtual bool spawnParticle(ParticleSystem* particleSystem, uint16_t stripLength) = 0;
+    virtual bool spawnParticle(ParticleSystem* particleSystem) = 0;
 
     float baseInterval;
     float emissionInterval;
     float emissionCounter;
+    float locationMin;
+    float locationMax;
 
 };
 

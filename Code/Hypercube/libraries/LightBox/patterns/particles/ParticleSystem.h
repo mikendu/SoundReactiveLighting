@@ -33,16 +33,16 @@ public:
             emitter->updateSoundParameters(spectrum, parameters);
     }
 
-    void update(float elapsedSeconds, uint16_t stripLength) 
+    void update(float elapsedSeconds) 
     {
         for (ParticleEmitter* emitter : emitters)
-            emitter->update(this, elapsedSeconds, stripLength);
+            emitter->update(this, elapsedSeconds);
 
         BufferNode<LightParticle>* currentNode = liveParticles.first();
         while (currentNode != nullptr) 
         {
             LightParticle* particle = currentNode->item;
-            bool alive = particle->update(elapsedSeconds, stripLength);
+            bool alive = particle->update(elapsedSeconds);
             if (!alive) 
             {
                 BufferNode<LightParticle>* expiredNode = currentNode;

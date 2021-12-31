@@ -22,9 +22,18 @@ public:
 
         analyzer.addCallback(std::bind(&VisualsManager::updateSoundParameters, this));
         // particleSystem.addEmitter(new HueCycleEmitter(1.0f, 0.0f, 0, colorOscillator));
-        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 0.0f, -16, colorOscillator));
-        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 1.0f, 0, colorOscillator));
-        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 2.0f, -16, colorOscillator));
+
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 0.0f, -16, colorOscillator, 60, LED_COUNT));
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 1.0f, 0, colorOscillator, 60, LED_COUNT));
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 2.0f, -16, colorOscillator, 60, LED_COUNT));
+
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 4.0f, 0.0f, -16, colorOscillator, 0, 60));
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 4.0f, 1.0f, 0, colorOscillator, 0, 60));
+        particleSystem.addEmitter(new HueCycleEmitter(1.0f / 4.0f, 2.0f, -16, colorOscillator, 0, 60));
+
+        // particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 0.0f, -16, colorOscillator));
+        // particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 1.0f, 0, colorOscillator));
+        // particleSystem.addEmitter(new HueCycleEmitter(1.0f / 3.0f, 2.0f, -16, colorOscillator));
     }
 
     void updateSoundParameters()
@@ -42,7 +51,8 @@ public:
         
         colorOscillator->update(deltaTime);
         colorParameters.update(deltaTime);
-        particleSystem.update(deltaTime, strip.length());
+
+        particleSystem.update(deltaTime);
         particleSystem.show(strip, colorParameters);
         beatVisualizer.show(strip);
     }

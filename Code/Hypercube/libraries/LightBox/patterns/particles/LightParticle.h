@@ -46,6 +46,9 @@ struct ParticleProperties
     float hardness = 1.0f;
     // controls "ramp up/down" of brightness. 0 = no ramp, 1 = full curve up and down
     float brightnessProfile = 0.5f; 
+
+    float minLocation = 0.0f;
+    float maxLocation = LED_COUNT;
 };
 
 class LightParticle
@@ -71,6 +74,7 @@ public:
         profileFactor = lerp(4096, 256, pow(properties.brightnessProfile, 0.5f));
         satRange = 255 - properties.saturation;
         valRange = 255 - properties.value;
+        locationRange = properties.maxLocation - properties.minLocation;
     }
 
     void updateSoundParameters(SpectrumAnalyzer& spectrum, DerivedParameters& parameters)
@@ -94,7 +98,7 @@ public:
         speed = parameters.getParameter(DerivedParameterType::PARTICLE_SPEED); 
     }
     
-    bool update(float elapsedSeconds, uint16_t stripLength) 
+    bool update(float elapsedSeconds) 
     {
         if (!isAlive())
             return false;
@@ -105,11 +109,11 @@ public:
 
         // Location
         location += (properties.velocity * elapsedSeconds * speed);
-        if (location > stripLength)
-            location -= stripLength;
+        while (location > properties.maxLocation)
+            location -= locationRange;
 
-        if (location < 0.0f)
-            location += stripLength;
+        while (location < properties.minLocation)
+            location += locationRange;
 
 
         // Brightness
@@ -132,7 +136,7 @@ public:
         if (!isAlive())
             return;
 
-        uint16_t stripLen = strip.length();
+        uint16_t stripLen = locationRange;
         short startPixel = round(location - radius) + stripLen;
         short endPixel = round(location + radius) + stripLen;
 
@@ -144,7 +148,7 @@ public:
             value = ease8InOutCubic(value);
 
             uint8_t scaledBrightness = scale8(scale8(currentVal, value), brightness);
-            uint16_t index = i  % strip.length();
+            uint16_t index = (i  % stripLen) + properties.minLocation;
             CRGB mainColor = CHSV(properties.hue, currentSat, scaledBrightness);
             CRGB secondaryColor = parameters.getScaledColor(GlobalColorType::PSYCHO, scaledBrightness);
             strip[index] += mainColor;
@@ -180,6 +184,7 @@ private:
     float radius;
     float baseRadius;
     float speed;
+    float locationRange;
 };
 
 

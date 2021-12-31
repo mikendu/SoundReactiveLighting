@@ -15,22 +15,27 @@ public:
     HueCycleEmitter(float particlesPerSecond,
                     float timeOffset, 
                     signed char offset, 
-                    HsvOscillator* colorOscillator) : ParticleEmitter(particlesPerSecond, timeOffset), hueOffset(offset), oscillator(colorOscillator)
+                    HsvOscillator* colorOscillator,
+                    float minLocation,
+                    float maxLocation) :    ParticleEmitter(particlesPerSecond, minLocation, maxLocation, timeOffset), 
+                                            hueOffset(offset), 
+                                            oscillator(colorOscillator)
     {
     }
 
     virtual void updateSoundParameters(SpectrumAnalyzer& spectrum, DerivedParameters& parameters)
     {
-        // float halfIntensity = 0.5f * spectrum.getIntensity();
-        // float decreaseMultiplier = 1.0f - halfIntensity;
-        // float increaseMultiplier = 1.0f + halfIntensity;
+        float multiplier = 0.125f * spectrum.getIntensity();
+        float decreaseMultiplier = 1.0f - multiplier;
+        float increaseMultiplier = 1.0f + multiplier;
 
-        // emissionInterval = baseInterval * decreaseMultiplier;
-        // minLife = 2.0f * decreaseMultiplier;
-        // maxLife = 4.0f * decreaseMultiplier;
-        // minSize = 8.0f * decreaseMultiplier;
-        // maxSize = 8.0f * decreaseMultiplier;
-        // velocity = 15.0f * increaseMultiplier;
+        emissionInterval = baseInterval * decreaseMultiplier;
+        minLife = 1.0f * increaseMultiplier;
+        maxLife = 4.0f * increaseMultiplier;
+        minSize = 5.0f * increaseMultiplier;
+        maxSize = 12.0f * increaseMultiplier;
+        minVel = 12.0f * increaseMultiplier;
+        minVel = 18.0f * increaseMultiplier;
         
         // minLife = 2.0f;
         // maxLife = 4.0f;
@@ -40,21 +45,28 @@ public:
     }
 
 protected:
-    virtual bool spawnParticle(ParticleSystem* particleSystem, uint16_t stripLength) 
+    virtual bool spawnParticle(ParticleSystem* particleSystem) 
     {
         CHSV color = oscillator->color();
         short hue = color.h;
         hue = (hue + hueOffset + 256) % 256;
         color.h = hue;
 
-        float location = random(0.0f, stripLength);
-        float size = random(8.0f, 12.0f);
-        float life = random(2.0f, 4.0f);
-        float velocity = 15.0f;
+        // float location = random(0.0f, 50.0f);
+        // float size = random(8.0f, 12.0f);
+        // float life = random(2.0f, 4.0f);
         
+        float location = random(locationMin, locationMax);
+        float size = random(minSize, maxSize);
+        float life = random(minLife, maxLife);
+        float speed = random(minVel, maxVel);
+        float direction = (randomFloat() >= 0.5f) ? 1.0f : -1.0f;
+        float velocity = direction * speed;
+
         // float location = 0;
         // float size = 10.0f;
         // float life = 3.0f;
+        // float velocity = 15.0f;        
 
         return particleSystem->spawn
         (
@@ -66,7 +78,9 @@ protected:
                 size, 
                 velocity, 
                 DEFAULT_HARDNESS, 
-                DEFAULT_BRIGHTNESS_PROFILE 
+                DEFAULT_BRIGHTNESS_PROFILE,
+                locationMin,
+                locationMax
             }, 
             location
         );  
@@ -76,11 +90,12 @@ private:
     HsvOscillator* oscillator;
     signed char hueOffset;
 
-    // float minLife;
-    // float maxLife;
-    // float minSize;
-    // float maxSize;
-    // float velocity;
+    float minLife;
+    float maxLife;
+    float minSize;
+    float maxSize;
+    float minVel;
+    float maxVel;
 
 };
 
